@@ -238,20 +238,3 @@ aside.side-panel{display:flex!important}
  .side-dialogue .marquee-bar .dialogue-copy span,.side-dialogue .marquee-bar.talking .dialogue-copy span{-webkit-line-clamp:3}
 }
 @media(max-width:900px){.notice-lane.side-notices{flex:1 1 200px}}
-
-/* Level 1 escape: Diego laughing splash. His photo pops in and wiggles with a
-   ring of laughing emojis, then the splash fades (about 2.3s, in time with the
-   fanfare) to reveal the victory scene. A 😂 badge stays on his portrait. */
-.diego-splash{position:absolute;inset:0;display:grid;place-items:center;z-index:30;pointer-events:none;animation:diego-splash-out .45s 2.3s ease-in forwards}
-.diego-splash:before{content:'';position:absolute;inset:-220px;background:radial-gradient(circle at 50% 45%,#0b1738f5 0,#0b1738ee 45%,#050d21f2 80%)}
-.diego-splash-face{position:relative;width:170px;height:170px;animation:diego-pop .7s cubic-bezier(.2,1.6,.4,1) both,diego-laugh .22s .7s ease-in-out 6 alternate}
-.diego-splash-face img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid #ffe18a;box-shadow:0 0 0 10px #ffe18a22,0 0 60px #ffd36a88}
-.diego-splash-laugh{position:absolute;right:-16px;bottom:-8px;font-size:64px;line-height:1;animation:diego-pop .5s .35s cubic-bezier(.2,1.6,.4,1) both}
-.diego-splash i{position:absolute;left:50%;top:50%;font-size:38px;line-height:1;font-style:normal;opacity:0;animation:diego-emoji 1.6s var(--d) ease-out forwards}
-.victory-faceoff .scene-person:nth-child(3){position:relative}
-.victory-faceoff .scene-person:nth-child(3):after{content:'😂';position:absolute;right:-10px;top:-8px;font-size:30px;line-height:1;animation:diego-pop .5s 2.6s cubic-bezier(.2,1.6,.4,1) both}
-@keyframes diego-pop{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
-@keyframes diego-laugh{from{transform:rotate(-6deg) translateY(0)}to{transform:rotate(6deg) translateY(-6px)}}
-@keyframes diego-emoji{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(-95px) rotate(calc(-1*var(--a))) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(-230px) rotate(calc(-1*var(--a))) scale(1.2)}}
-@keyframes diego-splash-out{to{opacity:0;visibility:hidden}}
-@media(prefers-reduced-motion:reduce){.diego-splash{display:none}}
