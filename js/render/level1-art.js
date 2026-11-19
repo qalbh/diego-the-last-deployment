@@ -32,14 +32,76 @@ function levelOneTile(x,y,wall){
 }
 function levelOneScenery(){
  // Window glow, layered office facade and neon ticket-board signage.
- const bg=ctx.createLinearGradient(0,0,0,576);bg.addColorStop(0,'#15294b');bg.addColorStop(.65,'#111b38');bg.addColorStop(1,'#090f28');ctx.fillStyle=bg;ctx.fillRect(0,0,800,576);
+ levelOneNightSky();
+ // Office towers peeking over the maze, lit up for the night shift.
  for(let i=0;i<14;i++){
    let x=i*65+7,y=25+(i%3)*12;
-   ctx.fillStyle='#1d385e';rr(x,y,48,87,5);ctx.fill();ctx.fillStyle='#416892';rr(x+5,y+4,38,55,3);ctx.fill();
-   ctx.fillStyle=i%3===0?'#fdd98a88':'#75cef16a';ctx.fillRect(x+11,y+12,9,15);ctx.fillRect(x+27,y+12,9,15);
+   ctx.fillStyle='#0f1a33';rr(x,y,48,87,5);ctx.fill();ctx.fillStyle='#1a2b4b';rr(x+5,y+4,38,55,3);ctx.fill();
+   ctx.fillStyle=i%3===0?'#ffd27acc':'#7fd2ff70';ctx.fillRect(x+11,y+12,9,15);ctx.fillRect(x+27,y+12,9,15);
  }
  ctx.save();ctx.shadowColor='#65d9f0';ctx.shadowBlur=15;ctx.fillStyle='#65d9f0';ctx.font='900 17px system-ui';ctx.fillText('BRIJ  /  TICKET DIVISION',15,26);ctx.restore();
  ctx.fillStyle='#89a9c9';ctx.font='11px system-ui';ctx.fillText('Haris is typing...',652,550);drawOfficeAtmosphere();
+}
+// ---- Level 1 night sky ------------------------------------------------
+// Painted across the whole 1000x720 canvas; the maze covers the middle, so
+// the sky shows as a frame: a top band, left/right margins and a bottom strip.
+// Stars and skyline come from a fixed seed so nothing jumps between frames.
+const NIGHT=(()=>{
+ let s=20261119;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+ // Only keep stars outside the maze area (115..865 x 45..695): the rest would be hidden anyway.
+ const stars=Array.from({length:300},()=>({x:r()*1000,y:r()*720,big:r()<.14,phase:r()*6.3,speed:.5+r()*1.8}))
+  .filter(st=>!(st.x>112&&st.x<868&&st.y>42&&st.y<698)).sort((a,b)=>a.big-b.big);
+ const skyline=[];
+ for(const [from,to] of [[0,112],[868,1000]]){
+  let x=from;
+  while(x<to){const w=18+Math.floor(r()*22),h=110+Math.floor(r()*190),wins=[];
+   for(let wy=720-h+10;wy<706;wy+=13)for(let wx=x+4;wx<x+w-5;wx+=8)if(r()<.38)wins.push({x:wx,y:wy,warm:r()<.7,phase:r()*6.3});
+   skyline.push({x,w,h,wins});x+=w+1+Math.floor(r()*3);}
+ }
+ return {stars,skyline};
+})();
+function levelOneNightSky(){
+ const W=cv.width,H=cv.height;
+ const sky=ctx.createLinearGradient(0,0,0,H);
+ sky.addColorStop(0,'#030617');sky.addColorStop(.45,'#081032');sky.addColorStop(.8,'#121648');sky.addColorStop(1,'#26205a');
+ ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ // Twinkling stars.
+ for(const st of NIGHT.stars){
+  ctx.globalAlpha=.35+.45*(.5+.5*Math.sin(clock*st.speed+st.phase));
+  ctx.fillStyle=st.big?'#fff6d8':'#bcd4ff'; // sorted, so the colour only switches once
+  const size=st.big?2:1.2;ctx.fillRect(st.x,st.y,size,size);
+  if(st.big){ctx.globalAlpha*=.35;ctx.fillRect(st.x-2,st.y+.5,6,1);ctx.fillRect(st.x+.5,st.y-2,1,6);}
+ }
+ ctx.globalAlpha=1;
+ // Occasional shooting star across the top band.
+ const t=clock%11;
+ if(t<.9){
+  const p=t/.9,hx=330+p*420,hy=6+p*26;
+  const tail=ctx.createLinearGradient(hx-90,hy-6,hx,hy);
+  tail.addColorStop(0,'#ffffff00');tail.addColorStop(1,'#ffffffcc');
+  ctx.globalAlpha=Math.sin(p*Math.PI);ctx.strokeStyle=tail;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(hx-90,hy-6);ctx.lineTo(hx,hy);ctx.stroke();ctx.globalAlpha=1;
+ }
+ // Moon with a soft halo, in the top-right margin.
+ const mx=934,my=92;
+ const halo=ctx.createRadialGradient(mx,my,18,mx,my,82);
+ halo.addColorStop(0,'#fff3c855');halo.addColorStop(1,'#fff3c800');
+ ctx.fillStyle=halo;ctx.beginPath();ctx.arc(mx,my,82,0,7);ctx.fill();
+ ctx.fillStyle='#f6efcf';ctx.beginPath();ctx.arc(mx,my,24,0,7);ctx.fill();
+ ctx.fillStyle='#d9cfa6';
+ for(const [cx,cy,cr] of [[-8,-6,5],[7,5,4],[-3,10,3],[9,-9,2.5]]){ctx.beginPath();ctx.arc(mx+cx,my+cy,cr,0,7);ctx.fill();}
+ // City skyline silhouettes in the side margins, windows gently flickering.
+ for(const b of NIGHT.skyline){
+  ctx.fillStyle='#060a1c';ctx.fillRect(b.x,H-b.h,b.w,b.h);
+  ctx.fillStyle='#1b2450';ctx.fillRect(b.x,H-b.h,b.w,2);
+ }
+ for(const warm of [true,false]){
+  ctx.fillStyle=warm?'#ffcf73':'#8fd8ff';
+  for(const b of NIGHT.skyline)for(const wn of b.wins)if(wn.warm===warm){
+   ctx.globalAlpha=.55+.3*Math.sin(clock*.7+wn.phase);ctx.fillRect(wn.x,wn.y,3,5);
+  }
+ }
+ ctx.globalAlpha=1;
 }
 function levelOneOfficeDecor(){
  // Decor placed on solid walls, never changes collision or walkable route.

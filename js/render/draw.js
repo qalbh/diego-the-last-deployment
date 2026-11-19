@@ -36,4 +36,4 @@ if(player.inv===0||Math.floor(clock*12)%2===0){ctx.save();ctx.globalAlpha=ghost>
 if(shield>0){ctx.strokeStyle='#6bffbd';ctx.lineWidth=3;ctx.beginPath();ctx.arc(player.x*T,player.y*T,23,0,Math.PI*2);ctx.stroke()}
 if(level===0)ctx.restore();
 // Mission and progress are displayed in the external game HUD, never over the maze.
-if(paused){ctx.fillStyle='#070b22bb';ctx.fillRect(0,0,800,576);ctx.font='bold 50px system-ui';ctx.fillStyle='white';ctx.fillText('PAUSED',300,280)}}
+if(paused){ctx.fillStyle='#070b22bb';ctx.fillRect(0,0,cv.width,cv.height);ctx.font='bold 50px system-ui';ctx.fillStyle='white';ctx.fillText('PAUSED',300,280)}}
