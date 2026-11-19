@@ -1,4 +1,4 @@
-// Memory Wall content (shown after the Diego Succession Plan at the end of Level 5).
+// Memory Wall content (shown after Level 5's results, at the end of the game).
 //
 // The team's real farewell messages, as they sent them (Slack emoji codes turned
 // into emoji, timestamps removed). Format inside `text`:

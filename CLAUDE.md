@@ -6,6 +6,8 @@
 
 Build a funny, affectionate, polished, browser-playable 2D arcade farewell game for Diego, a Brij developer leaving the company. Diego tries to escape a maze of coworkers who refuse to let him leave. Each level introduces recognizable teammates as moving enemies or bosses, signature project/engineering-themed attacks, humorous real-message-inspired dialogue, a golden-key/exit objective, and a newly unlocked skill for a fictional **Diego AI** replacement. The final boss is Zack, and the payoff is a **Diego Succession Plan** AI reveal followed by a heartfelt **Memory Wall**. Preserve humor, recognizable faces, playability, and the already approved Level 1 experience.
 
+> **20 Nov 2026, user decision: the Diego AI / Succession Plan theme is REMOVED from the game** ("it doesn't suit"). No per-level skill unlock or "DIEGO AI MODULE / BUILD PROGRESS" card, victory buttons say "▶ SEE RESULTS", and Level 5's results go straight to the Memory Wall, then the laughing-GIF send-off. Mentions of skills, modules, Diego AI or the Succession Plan elsewhere in this document are historical; do not reintroduce them. (`LEVELS[].skill` and `unlocked` still exist in data but are not shown.)
+
 ## 1. Rules of engagement for the coding agent
 
 1. **Do not rebuild from scratch.** Work on the current self-contained HTML/CSS/JavaScript Canvas game in `index.html`.

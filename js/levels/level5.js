@@ -1,5 +1,4 @@
-// Level 5: Zack, THE FINAL BOSS ("Final Deployment"), then the Diego Succession
-// Plan and the Memory Wall.
+// Level 5: Zack, THE FINAL BOSS ("Final Deployment"), then the Memory Wall.
 //
 // Built on the earlier levels' systems (braided maze, boss movement helpers,
 // key and exit, pickups, abilities, cutscene panels, victory scene). Hazards from
@@ -9,7 +8,7 @@
 //
 // Flow: fix 2 production INCIDENTS -> the golden key unlocks -> grab it ->
 // SURPRISE PROMO PROJECT + "YOU WILL NEVER ESCAPE US" -> exit -> victory ->
-// Diego Succession Plan -> Memory Wall -> final laughing-GIF send-off.
+// results -> Memory Wall -> final laughing-GIF send-off.
 // Zack's phases:
 //  1 "ARE YOU AVAILABLE?" (start): patrols and chases, 🚨 shots, URGENT pings.
 //  2 "URGENT" (after the first incident is fixed): red alarms, faster, and his
@@ -279,24 +278,15 @@ function levelFiveVictoryScene(){
   return `<i class="victory-confetti" style="--x:${left}%;--delay:${delay}s;--duration:${duration}s;--tilt:${(i%2?1:-1)*(35+i%5*17)}deg;--color:${palette[i%palette.length]}"></i>`;
  }).join('');
  const bursts=Array.from({length:3},(_,j)=>`<div class="victory-firework firework-${j+1}">${Array.from({length:12},(_,i)=>`<b style="--angle:${i*30}deg;--distance:${62+j*20}px;--delay:${j*.35}s"></b>`).join('')}</div>`).join('');
- show(`<div class="victory-experience"><div class="victory-particles" aria-hidden="true">${confetti}${bursts}</div><div class="victory-orbit" aria-hidden="true"></div><div class="victory-kicker"><span class="victory-status-light"></span> FINAL MISSION COMPLETE <span class="victory-separator">/</span> DEPLOYMENT APPROVED</div><div class="victory-medal" aria-hidden="true">🏆</div><h2 class="victory-headline">DIEGO HAS<br><em>ESCAPED BRIJ!</em></h2><div class="victory-ribbon"><span>🚨 FINAL BOSS</span><strong>DEFEATED</strong><span>✈️ FREEDOM</span></div><div class="victory-faceoff">${scenePortrait('zack')}<div class="victory-vs">VS <span>✓</span></div><div class="scene-person reaction-person"><img class="reaction-gif" src="${REACTIONS.happy}" alt="Diego laughing"><span>DIEGO</span></div></div><div class="victory-conversation"><p><b>ZACK</b><span>“${QUOTES.zack.defeated[0]}”</span></p></div><div class="victory-tagline">One agenda item left.</div><div class="victory-next-label">17 NOV 2026 · AGENDA ITEM</div></div>`);
- sceneButtons('🤖 OPEN: DIEGO SUCCESSION PLAN',levelFiveResults,false);
+ show(`<div class="victory-experience"><div class="victory-particles" aria-hidden="true">${confetti}${bursts}</div><div class="victory-orbit" aria-hidden="true"></div><div class="victory-kicker"><span class="victory-status-light"></span> FINAL MISSION COMPLETE <span class="victory-separator">/</span> DEPLOYMENT APPROVED</div><div class="victory-medal" aria-hidden="true">🏆</div><h2 class="victory-headline">DIEGO HAS<br><em>ESCAPED BRIJ!</em></h2><div class="victory-ribbon"><span>🚨 FINAL BOSS</span><strong>DEFEATED</strong><span>✈️ FREEDOM</span></div><div class="victory-faceoff">${scenePortrait('zack')}<div class="victory-vs">VS <span>✓</span></div><div class="scene-person reaction-person"><img class="reaction-gif" src="${REACTIONS.happy}" alt="Diego laughing"><span>DIEGO</span></div></div><div class="victory-conversation"><p><b>ZACK</b><span>“${QUOTES.zack.defeated[0]}”</span></p></div><div class="victory-tagline">Brij has officially been escaped.</div><div class="victory-next-label">THE TEAM HAS A FEW WORDS FOR YOU</div></div>`);
+ sceneButtons('▶ SEE RESULTS',levelFiveResults,false);
  panel.classList.add('victory-panel');
 }
 function levelFiveResults(){
  phase='win';if(!unlocked.includes(4))unlocked.push(4);updateUI();
  const stars=clock<300?3:clock<400?2:1;
- show(`<div class="cinematic-kicker">FINAL BOSS DEFEATED · DIEGO AI 5 / 5</div><h2 class="cinematic-title">LEVEL 5 CLEARED!</h2><div class="cinematic-sparkles">${'★'.repeat(stars)}</div><div class="cinematic-stats"><div><strong>${Math.floor(clock/60)}:${String(Math.floor(clock%60)).padStart(2,'0')}</strong><span>ESCAPE TIME</span></div><div><strong>${health}%</strong><span>HEALTH LEFT</span></div><div><strong>${score}</strong><span>FINAL SCORE</span></div></div><div class="cinematic-skill"><div class="cinematic-kicker">🤖 DIEGO AI MODULE INSTALLED</div><h2>✓ AI LEADERSHIP</h2><p>Stays calm through URGENT pings, explains exactly what happened, and somehow ships every promo.</p><b style="color:#90ffb5">BUILD PROGRESS: 5 / 5 MODULES</b></div>`);
- sceneButtons('🤖 INITIALIZE DIEGO AI',successionPlan,false);
-}
-
-// ---- Diego Succession Plan (Zack's agenda item, 17 Nov 2026) ----------------
-function successionPlan(){
- phase='final';
- const modules=LEVELS.map((l,i)=>`<div class="succession-module" style="--d:${.35+i*.45}s"><span>${['🎫','📅','🐞','📘','🚨'][i]}</span><b>${l.skill}</b><em>INSTALLED</em></div>`).join('');
- show(`<div class="succession"><div class="cinematic-kicker">MEETING AGENDA · 17 NOV 2026 · ITEM 1</div><h2 class="succession-title">DIEGO SUCCESSION PLAN</h2><div class="succession-bot" aria-hidden="true">🤖</div><div class="succession-modules">${modules}</div><div class="succession-bar"><i></i></div><div class="succession-status"><b>DIEGO AI v1.0: ONLINE</b><span>All five skill modules installed. Running first task...</span></div><div class="succession-test"><p><b>DIEGO AI:</b> “${QUOTES.diego.attack[0]}”</p><p class="succession-error"><b>REPLACEMENT CONFIDENCE: 0%</b><br>ERROR: Original Diego is irreplaceable. 💜</p></div></div>`);
+ show(`<div class="cinematic-kicker">FINAL BOSS DEFEATED · LEVEL 5 / 5</div><h2 class="cinematic-title">LEVEL 5 CLEARED!</h2><div class="cinematic-sparkles">${'★'.repeat(stars)}</div><div class="cinematic-stats"><div><strong>${Math.floor(clock/60)}:${String(Math.floor(clock%60)).padStart(2,'0')}</strong><span>ESCAPE TIME</span></div><div><strong>${health}%</strong><span>HEALTH LEFT</span></div><div><strong>${score}</strong><span>FINAL SCORE</span></div></div>`);
  sceneButtons('💜 OPEN THE MEMORY WALL',memoryWall,false);
- panel.classList.add('finale-panel');
 }
 
 // ---- Memory Wall: see js/ui/memory-wall.js (content in js/data/memories.js) ----
@@ -306,7 +296,7 @@ function finalEscape(){
  phase='final';victoryFanfare();
  const palette=['#c77aff','#ffda65','#ff6b91','#7ff5ea','#8dffc0'];
  const confetti=Array.from({length:60},(_,i)=>`<i class="victory-confetti" style="--x:${(i*47+13)%100}%;--delay:${(i*0.19)%2.4}s;--duration:${3.1+(i%7)*0.33}s;--tilt:${(i%2?1:-1)*(35+i%5*17)}deg;--color:${palette[i%palette.length]}"></i>`).join('');
- show(`<div class="final-escape"><div class="victory-particles" aria-hidden="true">${confetti}</div><div class="cinematic-kicker">ALL 5 LEVELS COMPLETE · STATUS: OUT OF OFFICE (FOREVER)</div><div class="final-gif"><img src="${REACTIONS.happy}" alt="Diego laughing"></div><h2 class="final-headline">DIEGO HAS FINALLY<br><em>ESCAPED!</em></h2><p class="final-quote">“...and he is already on his way to start his own venture. 🚀”</p><p class="final-joke">First hire: Diego AI v1.0. Second hire: whoever closes all those tickets. 😂</p></div>`);
+ show(`<div class="final-escape"><div class="victory-particles" aria-hidden="true">${confetti}</div><div class="cinematic-kicker">ALL 5 LEVELS COMPLETE · STATUS: OUT OF OFFICE (FOREVER)</div><div class="final-gif"><img src="${REACTIONS.happy}" alt="Diego laughing"></div><h2 class="final-headline">DIEGO HAS FINALLY<br><em>ESCAPED!</em></h2><p class="final-quote">“...and he is already on his way to start his own venture. 🚀”</p><p class="final-joke">His first hire: whoever closes all those tickets. 😂</p></div>`);
  sceneButtons('↻ PLAY AGAIN FROM LEVEL 1',()=>{score=0;unlocked=[];startLevel(0)},false);
  panel.classList.add('finale-panel');
 }

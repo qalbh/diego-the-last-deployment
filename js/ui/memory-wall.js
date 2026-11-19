@@ -1,5 +1,5 @@
-// The Memory Wall: the last heartfelt screen of the game (after the Diego
-// Succession Plan). Content lives in js/data/memories.js.
+// The Memory Wall: the last heartfelt screen of the game (after Level 5's
+// results). Content lives in js/data/memories.js.
 //
 // Layout (inside the game overlay, never over gameplay):
 //  - a photo board of polaroids on the left (click one to see it large),
