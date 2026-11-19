@@ -197,6 +197,8 @@ The current source's `QUOTES` object is authoritative for in-game text. It is tr
 
 **Accepted current visual direction:** premium, readable HUD, dark navy + neon teal accents, large full-width maze, no right information column; Level 1 richer wall depth, tiled floor and office decorations; character photos remain recognizable and bodies move; pac-man-like circular boss face. Diegetic drama is welcome but must never cover gameplay.
 
+**Fit-to-screen layout (user request, 19 Nov 2026):** the whole UI must fit in one browser window with no page scrolling. The Active Mission and Current Threat boxes were removed at the user's request (elements kept hidden in the DOM because JS writes to them). Health, hits and score sit in the title bar; the live quest text sits in the objective chip; the canvas scales to the remaining height (CSS container query on `.game-fit`); the ability dock has a fixed height so dialogue never resizes the maze; `js/ui/fit-overlay.js` zooms any overlay panel that is taller than the game box so its buttons stay visible. Haris's mode is now shown only by the bubble over his head and the notice lane. The list below is the older placement spec; where it mentions Current Threat or the top mission card, the fit-to-screen layout supersedes it.
+
 Detailed UI placement:
 
 - Top: branded title/header, mission status, Current Threat with boss portrait and mode, player health (100/100 and four hits), small score.
