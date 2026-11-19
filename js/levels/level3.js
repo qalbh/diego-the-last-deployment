@@ -6,7 +6,7 @@
 // Level 3 specific lives here and in js/render/level3-art.js; shared files
 // only call in when level===2.
 //
-// Flow: tick the 3 RELEASE CHECKLIST items -> the golden key unlocks -> grab it
+// Flow: tick the 2 RELEASE CHECKLIST items -> the golden key unlocks -> grab it
 // -> GO LIVE (all three come after Diego) -> exit.
 //  - Zoofi (Lead QA), the hunter: chases Diego and throws 🐛 bugs.
 //  - Sush (Engineering Lead), the long-range one: keeps his distance and fires
@@ -23,7 +23,7 @@
 // at most 3 release-blocker bugs at once, nothing kills instantly.
 
 const L3={W:21,H:17,SCALE:.95,OX:101,OY:46};
-const L3_ITEMS=[{icon:'🧪',name:'Tests passed'},{icon:'📝',name:'Release notes written'},{icon:'🚀',name:'Deploy approved'}];
+const L3_ITEMS=[{icon:'🧪',name:'Tests passed'},{icon:'🚀',name:'Deploy approved'}];
 const L3_COLORS={zoofi:'#e58bff',sush:'#7fd3ff',arqam:'#ffcf5a'};
 let l3=null,l3Layout=null,levelThreeSnapshot=null,levelThreeSceneStep=0;
 
@@ -57,7 +57,7 @@ function placeLevelThreeObjects(){
  const route=mazeRoute({x:1,y:1},exitCell),onRoute=new Set(route.map(c=>l2Key(c.x,c.y)));
  const offRoute=c=>!onRoute.has(l2Key(c.x,c.y));
  const center=c=>({x:c.x+.5,y:c.y+.5});
- // Three checklist items, off the direct route and spread around the office.
+ // The checklist items, off the direct route and spread around the office.
  const spots=[];
  for(let i=0;i<L3_ITEMS.length;i++){
   const c=pick(c=>c.d>=7&&offRoute(c)&&!near(c,spots,8))||pick(c=>c.d>=7&&!near(c,spots,6))||pick(c=>c.d>=4);
@@ -70,9 +70,9 @@ function placeLevelThreeObjects(){
  used.add(l2Key(route[ki].x,route[ki].y));
  const keySpot=center(route[ki]);
  const keep=[keySpot,...items];
- // Level 1's power-ups, with an extra shield and heal for a three-boss level.
+ // Level 1's power-ups, plus 3 coffees and an extra shield and heal for a three-boss level.
  pickups=[];
- for(const type of ['coffee','dnd','heal','goldenChappal','dnd','heal']){const c=pick(c=>c.d>4&&!near(c,keep,2)&&!near(c,pickups,4));if(c)pickups.push({type,...center(c)})}
+ for(const type of ['coffee','coffee','coffee','dnd','heal','goldenChappal','dnd','heal']){const c=pick(c=>c.d>4&&!near(c,keep,2)&&!near(c,pickups,4));if(c)pickups.push({type,...center(c)})}
  // Production fire vents: two on the main route, three elsewhere, spread apart.
  const vents=[];
  const ventOk=c=>c.d>=5&&!near(c,vents,4)&&!near(c,keep,2)&&!near(c,pickups,1)&&Math.abs(c.x-exitCell.x)+Math.abs(c.y-exitCell.y)>2;
@@ -289,7 +289,7 @@ function renderLevelThreeIntro(){
   show(`<div class="scene-label">THE RELEASE CHANNEL WAKES UP</div><div class="scene-people">${trio}</div><div class="scene-card"><p class="scene-quote">ZOOFI: “${QUOTES.zoofi.intro[0]}” ... “${QUOTES.zoofi.intro[1]}”</p><p class="scene-quote">SUSH: “${QUOTES.sush.intro[0]}”</p><p class="scene-quote">ARQAM: “${QUOTES.arqam.intro[0]}”</p></div><small>Lead QA, Engineering Lead and Developer have entered the chat.</small>`);
   sceneButtons('CONTINUE ▶',()=>{levelThreeSceneStep=2;renderLevelThreeIntro()},true,beginLevelThree);
  }else{
-  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 3: SURVIVE RELEASE DAY!</h2><p>✅ Tick the 3 release checklist items 🧪 📝 🚀 to unlock the 🔑 golden key · 🔑 Grab it · 🚪 Ship it through the exit</p><small>Watch out: 🐞 Zoofi files bugs → 📨 Sush reassigns them → 🔁 Arqam sends them back · 🩴 stun a boss to break the chain · 🔥 fire vents</small>`);
+  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 3: SURVIVE RELEASE DAY!</h2><p>✅ Tick the 2 release checklist items 🧪 🚀 to unlock the 🔑 golden key · 🔑 Grab it · 🚪 Ship it through the exit</p><small>Watch out: 🐞 Zoofi files bugs → 📨 Sush reassigns them → 🔁 Arqam sends them back · 🩴 stun a boss to break the chain · 🔥 fire vents</small>`);
   sceneButtons('▶ BEGIN LEVEL 3',beginLevelThree,false);
  }
 }
@@ -297,7 +297,7 @@ function beginLevelThree(){
  if(level!==2)return;
  phase='playing';hide();dialogueCooldown=2.2;
  document.getElementById('dialogue').style.display='none';updateUI();
- showPowerText('🔒 The golden key is locked. Tick the 3 ✅ release checklist items to unlock it');
+ showPowerText('🔒 The golden key is locked. Tick the 2 ✅ release checklist items to unlock it');
  setTimeout(()=>{if(phase==='playing'&&level===2)speak('zoofi',true,'intro',0)},900);
  setTimeout(()=>{if(phase==='playing'&&level===2)speak('zoofi',true,'intro',1)},2600);
 }
