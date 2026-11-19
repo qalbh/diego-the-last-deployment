@@ -119,16 +119,12 @@ I look up to you Diego, I hope things work out for you and your startup ideas, y
    highlight:'I’m excited to see what you build and will be cheering you on!!',
    text:`Diego! It’s been so great working with you, and I’m so glad you made it to NYC so we could all meet in person! Thank you for all your help with GTM engineering. I’m excited to see what you build and will be cheering you on!!`},
   {name:'Qalb',role:'Design · maker of this game',photo:null,
-   highlight:'A farewell card felt too small for you, so I built you a whole game instead.',
+   highlight:'It was a great pleasure and a great journey working with you.',
    text:`Diego,
 
-Designers don’t always get lucky with the developers they hand their work to. I got lucky with you. You never treated a design as “just a mockup”: you cared about how things looked and felt, you asked the right questions, and working with you never felt like design on one side and engineering on the other. It felt like one team, building something together and having fun doing it.
+It was a great pleasure and a great journey working with you. A farewell card felt too small for you, so I built you a whole game instead, and yes, I made sure you escape at the end. 😄 I hope you love this game!
 
-A farewell card felt too small for you, so I built you a whole game instead. Every level is a little thank you, every boss is someone who is going to miss you, and yes, I made sure you escape at the end. 😄
-
-Go build something amazing with your new venture. I hope it looks as good as it works, and if it ever needs a designer, you know where to find me.
-
-Thank you for everything, Diego. You will be missed! 💜
+Good luck with your new venture. You will be missed! 💜
 
 Qalb`}
  ]
