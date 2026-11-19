@@ -19,13 +19,14 @@ Build a funny, affectionate, polished, browser-playable 2D arcade farewell game 
 9. **Don't overload Level 1.** Add genuine new mechanics primarily to later levels. Level 1 is an introduction, not a final boss gauntlet.
 10. **Flag unverified work.** Syntax checks are not a playthrough; planned future-level mechanics are not finished merely because later levels can load.
 11. **Respect user wording and humor.** The exact dialogue lists are in this document and in `QUOTES` in source. Preserve quoted lines unless the user requests edits. User prefers concise, friendly communication and no em-dash punctuation.
-12. **Run offline with no framework dependencies** unless user approves migration. Character pictures are embedded as data URLs in source.
+12. **Run offline with no framework dependencies** unless user approves migration. Character pictures live in `assets/photos/` and are referenced by relative path in `js/data/photos.js`.
 
 ## 2. Build and architecture as inspected on 19 November 2026
 
 ### Files
 
-- `index.html`: canonical playable HTML5 Canvas game, inline CSS and JavaScript, and all nine character photos embedded as base64 data URLs in `PHOTOS`.
+- `index.html`: HUD markup plus the ordered list of `<script>` tags. **Since 19 Nov 2026 the game is split into folders** (see README "Project structure"): `css/styles.css`, `assets/photos/*.jpg`, and `js/` grouped into `data/`, `core/`, `audio/`, `world/`, `ui/`, `levels/`, `gameplay/`, `render/`, with `js/main.js` loaded last to boot. The split copied code lines verbatim; behavior was compared against the single-file baseline in Chrome (same results, no console errors).
+- Scripts are classic (non-module) and share one global scope so the game still runs from `file://`. Do not convert to ES modules without a local server plan. Top-level code in a file may only use names from files loaded earlier.
 - `README.md`: existing run/developer notes.
 - `ANTIGRAVITY_PROMPT.txt`: shorter agent onboarding prompt.
 - `CLAUDE.md`: this complete handoff.

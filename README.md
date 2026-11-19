@@ -8,7 +8,22 @@ Open `index.html` in a browser, or serve the folder locally (e.g. `python3 -m ht
 
 ## Project structure
 
-- `index.html` — entire working game, including inline HTML/CSS/JavaScript and embedded character photos.
+```
+index.html                  HUD markup + script tags (load order matters)
+css/styles.css              all styling
+assets/photos/*.jpg         the nine character photos
+js/data/                    photos.js, dialogue.js (QUOTES, comebacks, hit jokes), levels.js (LEVELS, THEMES)
+js/core/                    state.js, progression.js (startLevel, win, finale), update.js, input.js
+js/audio/sound.js           synthesized arcade sounds
+js/world/maze.js            maze generation, routing, Level 1 placement, wall/distance helpers
+js/ui/                      overlay.js, dialogue.js, hud.js, menus.js
+js/levels/level1-story.js   Level 1 intro, victory, results, same-maze retry
+js/gameplay/                pickups.js, enemies.js, combat.js, abilities.js
+js/render/                  effects.js, level1-art.js, characters.js, draw.js
+js/main.js                  game loop and boot (loaded last)
+```
+
+The scripts are plain `<script>` tags (not ES modules) that share one global scope, so `index.html` still runs by double-clicking it with no server. Add new files to the script list in `index.html`; `js/main.js` must stay last because it boots the game.
 
 ## Current design and gameplay
 

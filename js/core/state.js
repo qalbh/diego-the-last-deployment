@@ -1,0 +1,5 @@
+// Canvas handles, grid constants and all runtime game state.
+// Do not change T, COLS, ROWS or the canvas size casually: Level 1 layout depends on them.
+const cv=document.getElementById('game'),ctx=cv.getContext('2d'),ov=document.getElementById('overlay'),panel=document.getElementById('panel');const T=40,COLS=25,ROWS=18;let ghost=0,ghostCooldown=0,throwCooldown=0,throws=[],facing=[1,0];let level=0,score=0,hearts=4,health=100,hasGoldenKey=false,goldenKey=null,pickups=[],coffeeBoost=0,dndCharges=0,harisMode="polite",harisModeClock=0,harisModeNotice="",harisBubbleTime=0,hitFlash=0,stats={hits:0,defeated:0},exitCell={x:22,y:15},player,grid,coins,enemies,projectiles,hazards=[],shield,keys={},phase='intro',last=0,clock=0,paused=false,unlocked=[],dialogueTime=0,dialogueCooldown=0;let effects=[],doorAnimation=0,heroAnimation=0,lastPlayerStep={x:1.5,y:1.5},lastHealth=100;const directions={left:[-1,0],right:[1,0],up:[0,-1],down:[0,1]};
+// Preserve the original layout and item positions when retrying Level 1.
+let levelOneSnapshot=null, levelOneSceneStep=0, diegoTicketCount=0, lastDiegoQuip=-1;

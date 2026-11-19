@@ -1,0 +1,9 @@
+// Level themes, hazard icons and the five boss levels.
+const THEMES=[{sky:'#111a40',floor:'#111d3d',wall:'#234b99',edge:'#66c6ff',accent:'#ffe48c',name:'ASANA BACKLOG',hazards:['snake']},{sky:'#2c164a',floor:'#241c47',wall:'#64408c',edge:'#e7a6ff',accent:'#ffb65b',name:'DEADLINE DIMENSION',hazards:['water','snake']},{sky:'#3d1228',floor:'#2c1834',wall:'#78345a',edge:'#ff7ca4',accent:'#ff5b73',name:'PRODUCTION ON FIRE',hazards:['fire','crash','snake']},{sky:'#082c36',floor:'#0d303d',wall:'#236b7b',edge:'#76e4ed',accent:'#a7f9ed',name:'KNOWLEDGE TRANSFER LAB',hazards:['water','crash','hack']},{sky:'#260e42',floor:'#1b133d',wall:'#5936a0',edge:'#c77aff',accent:'#ffda65',name:'FINAL DEPLOYMENT',hazards:['fire','water','crash','hack','snake']}];
+const HAZARD_ICONS={bug:'🪲',snake:'🐍',water:'🌊',fire:'🔥',crash:'💥',hack:'👾'};
+const LEVELS=[
+{name:'Haris',title:'THE TICKET MASTER',bosses:['haris'],skill:'Ticket Intelligence',description:'Haris throws Asana tickets faster than Diego can close them.',attack:'📋',speed:1.2},
+{name:'Eren & Jake',title:'THE PROJECT GUARDIANS',bosses:['eren','jake'],skill:'Project Mastery',description:'Two project managers. Twice the deadlines. Zero escape routes.',attack:'📅',speed:1.4},
+{name:'Sush, Zoofi & Arqam',title:'THE TRIPLE THREAT',bosses:['sush','zoofi','arqam'],skill:'Quality & Engineering',description:'Zoofi throws bugs. Sush and Arqam reassign their tickets to Diego. Teamwork!',attack:'🐛',speed:1.5},
+{name:'Ali',title:'THE KNOWLEDGE GATEKEEPER',bosses:['ali'],skill:'Documentation & Knowledge Transfer',description:'Ali needs docs, runbooks, and one final knowledge transfer before Diego goes.',attack:'📚',speed:1.65},
+{name:'Zack',title:'THE FINAL BOSS',bosses:['zack'],skill:'AI Leadership',description:'Zack has just one quick request. And another. And another.',attack:'🚨',speed:1.85}];
