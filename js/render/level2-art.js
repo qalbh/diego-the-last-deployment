@@ -115,7 +115,7 @@ function levelTwoLockedKey(){
  ctx.save();
  ctx.fillStyle='#5b2a8c';rr(x+2,y+2,17,14,3);ctx.fill();ctx.strokeStyle='#ffe18b';ctx.lineWidth=2;ctx.stroke();
  ctx.beginPath();ctx.arc(x+10.5,y+2,4.6,Math.PI,0);ctx.stroke();ctx.fillStyle='#ffe18b';ctx.beginPath();ctx.arc(x+10.5,y+8,2,0,7);ctx.fill();ctx.fillRect(x+9.7,y+8,1.6,4);
- for(let i=0;i<l2.signoffs.length;i++){ctx.fillStyle=i<n?'#5dffb0':'#ffffff40';ctx.strokeStyle='#1b0f33';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x-6+i*12,y-24,4,0,7);ctx.fill();ctx.stroke()}
+ for(let i=0;i<l2.signoffs.length;i++){ctx.fillStyle=i<n?'#5dffb0':'#ffffff40';ctx.strokeStyle='#1b0f33';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x-6*(l2.signoffs.length-1)+i*12,y-24,4,0,7);ctx.fill();ctx.stroke()}
  ctx.restore();
 }
 function levelTwoDeadlineSpot(d){

@@ -5,7 +5,7 @@
 // Level 1 plays. Everything Level 2 specific lives here and in
 // js/render/level2-art.js; shared files only call in when level===1.
 //
-// Flow: collect 2 stakeholder sign-offs -> golden key appears -> grab it ->
+// Flow: collect the stakeholder sign-off -> golden key appears -> grab it ->
 // SPRINT REVIEW (Eren hunts Diego, Jake cuts him off on the route ahead) -> exit.
 //  - Eren, the hunter: chases Diego and sets DEADLINES. Reach her status-update
 //    tile before the ring runs out, or she fires a dodgeable 📅 volley and
@@ -72,10 +72,9 @@ function placeLevelTwoObjects(){
   const c=pool[Math.floor(Math.random()*pool.length)];used.add(l2Key(c.x,c.y));return c};
  const route=mazeRoute({x:1,y:1},exitCell),onRoute=new Set(route.map(c=>l2Key(c.x,c.y)));
  const offRoute=c=>!onRoute.has(l2Key(c.x,c.y));
- // Two stakeholder sign-offs in opposite parts of the office, off the direct route.
- const s1=pick(c=>c.x>=9&&c.y<=6&&c.d>=8&&offRoute(c))||pick(c=>c.d>=8)||pick(c=>c.d>=4);
- const s2=pick(c=>c.x<=9&&c.y>=8&&c.d>=8&&offRoute(c)&&Math.abs(c.x-s1.x)+Math.abs(c.y-s1.y)>=8)||pick(c=>c.d>=8)||pick(c=>c.d>=4);
- const signoffs=[s1,s2].map(c=>({x:c.x+.5,y:c.y+.5}));
+ // One stakeholder sign-off, off the direct route so Diego has to detour for it.
+ const s1=pick(c=>c.d>=8&&offRoute(c))||pick(c=>c.d>=8)||pick(c=>c.d>=4);
+ const signoffs=[s1].map(c=>({x:c.x+.5,y:c.y+.5}));
  // The golden key appears on the main route, ~60% of the way to the exit.
  let ki=Math.max(2,Math.min(route.length-3,Math.floor(route.length*.6)));
  while(used.has(l2Key(route[ki].x,route[ki].y))&&ki<route.length-2)ki++;
@@ -151,13 +150,13 @@ function updateLevelTwo(dt){
   const n=l2SignoffsTaken();
   if(n<s.signoffs.length)showPowerText(`✅ STAKEHOLDER SIGN-OFF ${n}/${s.signoffs.length}!`);
   else{goldenKey={...s.keySpot};arcadeSound('key');burst(goldenKey.x*T,goldenKey.y*T,'#ffe18b',30,1.3);
-   showPowerText('✅ BOTH SIGN-OFFS IN! 🔑 The golden key is unlocked');}
+   showPowerText('✅ SIGN-OFF APPROVED! 🔑 The golden key is unlocked');}
  }
  if(goldenKey&&!hasGoldenKey&&distance(player,goldenKey)<.5){
   hasGoldenKey=true;doorAnimation=1.25;burst(player.x*T,player.y*T,'#ffe18b',34,1.5);goldenKey=null;score+=100;arcadeSound('key');
   startSprintReview();
  }
- // The key is visible from the start but locked until both sign-offs are in.
+ // The key is visible from the start but locked until the sign-off is in.
  s.lockHintCd=Math.max(0,s.lockHintCd-dt);
  if(s.lockHintCd===0&&!goldenKey&&!hasGoldenKey&&distance(player,s.keySpot)<.6){
   showPowerText(`🔒 KEY LOCKED! Collect ${s.signoffs.length-l2SignoffsTaken()} more ✅ sign-off${s.signoffs.length-l2SignoffsTaken()===1?'':'s'} to unlock it`);s.lockHintCd=2.5}
@@ -292,7 +291,7 @@ function levelTwoQuest(){
  if(!l2)return '';
  if(l2.deadline)return `⏰ <b>DEADLINE ${Math.ceil(l2.deadline.time)}s</b> · Reach Eren's status update`;
  const n=l2SignoffsTaken();
- if(n<l2.signoffs.length)return `🔒 <b>KEY LOCKED</b> · Collect ✅ sign-offs (${n}/${l2.signoffs.length}) to unlock it`;
+ if(n<l2.signoffs.length)return `🔒 <b>KEY LOCKED</b> · Collect the ✅ sign-off to unlock it`;
  if(!hasGoldenKey)return '🔑 <b>KEY UNLOCKED</b> · Grab the golden key';
  return '🏃 <b>SPRINT REVIEW</b> · Reach the exit!';
 }
@@ -306,7 +305,7 @@ function renderLevelTwoIntro(){
   show(`<div class="scene-label">STANDUP IS RUNNING LONG</div><div class="scene-people">${scenePortrait('eren')}${scenePortrait('jake')}</div><div class="scene-card"><p class="scene-quote">EREN: “${QUOTES.eren.attack[1]}”</p><p class="scene-quote">JAKE: “${QUOTES.jake.attack[1]}”</p></div><small>Two PMs have entered the chat. Escape status: blocked.</small>`);
   sceneButtons('CONTINUE ▶',()=>{levelTwoSceneStep=2;renderLevelTwoIntro()},true,beginLevelTwo);
  }else{
-  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 2: SURVIVE SPRINT PLANNING!</h2><p>✅ Collect 2 sign-offs to unlock the 🔑 golden key · 🔑 Grab it · 🚪 Unlock the exit</p><small>Watch out: ⏰ Eren's deadlines · 📋 Jake's barriers (🩴 breaks them) · 🌀 scope creep slows you down</small>`);
+  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 2: SURVIVE SPRINT PLANNING!</h2><p>✅ Collect the sign-off to unlock the 🔑 golden key · 🔑 Grab it · 🚪 Unlock the exit</p><small>Watch out: ⏰ Eren's deadlines · 📋 Jake's barriers (🩴 breaks them) · 🌀 scope creep slows you down</small>`);
   sceneButtons('▶ BEGIN LEVEL 2',beginLevelTwo,false);
  }
 }
@@ -314,7 +313,7 @@ function beginLevelTwo(){
  if(level!==1)return;
  phase='playing';hide();dialogueCooldown=2.2;
  document.getElementById('dialogue').style.display='none';updateUI();
- showPowerText('🔒 The golden key is locked. Collect 2 ✅ sign-offs to unlock it');
+ showPowerText('🔒 The golden key is locked. Collect the ✅ sign-off to unlock it');
  setTimeout(()=>{if(phase==='playing'&&level===1)speak('eren',true,'intro')},900);
 }
 function levelTwoVictoryScene(){
