@@ -344,3 +344,10 @@ aside.side-panel{display:flex!important}
 .memory-panel .mw-text,.memory-panel .mw-text p,.memory-panel .mw-text li{color:#241b38;opacity:1;text-align:left;font-size:15px;line-height:1.55}
 .memory-panel .mw-text h4{color:#7a3fb5;opacity:1}
 .memory-panel .mw-note q,.memory-panel .mw-note b{opacity:1}
+/* Victory conversations: Diego's rows are highlighted by class (not by position), longer chats stagger in. */
+.overlay .panel .victory-conversation p:nth-child(2):not(.diego-line){background:linear-gradient(110deg,#243656df,#182744e8);border-color:#55718d}
+.victory-conversation p:nth-child(2):not(.diego-line) b{color:#ffd891}
+.overlay .panel .victory-conversation p.diego-line{background:linear-gradient(110deg,#194d4be3,#152d43e8);border-color:#479e84}
+.victory-conversation p.diego-line b{color:#77f8c3}
+.victory-conversation p:nth-child(3){animation-delay:.8s}
+.victory-conversation p:nth-child(4){animation-delay:.92s}

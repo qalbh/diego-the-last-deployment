@@ -238,7 +238,7 @@ function drawLevelFour(){
  ctx.font='21px serif';for(const p of projectiles)ctx.fillText('📚',p.x*T-12,p.y*T+8);
  ctx.restore();
  if(phase==='terminal'||player.inv===0||Math.floor(clock*12)%2===0){ctx.save();ctx.globalAlpha=ghost>0?.22:1;levelOneCharacter('diego',player.x*T,player.y*T,true);ctx.restore()}
- if(ghost>0){ctx.save();ctx.globalAlpha=.4+.12*Math.sin(clock*13);ring(player.x*T,player.y*T,'#72e2ff',ghost/GHOST_TIME,24);ctx.font='22px serif';ctx.fillText('👻',player.x*T-10,player.y*T-23);ctx.restore()}
+ if(ghost>0){ctx.save();ctx.globalAlpha=.4+.12*Math.sin(clock*13);ring(player.x*T,player.y*T,'#72e2ff',ghost/ghostTime(),24);ctx.font='22px serif';ctx.fillText('👻',player.x*T-10,player.y*T-23);ctx.restore()}
  if(shield>0){ctx.strokeStyle='#6bffbd';ctx.lineWidth=3;ctx.beginPath();ctx.arc(player.x*T,player.y*T,23,0,Math.PI*2);ctx.stroke()}
  if(phase==='terminal'&&l4.termCode)levelFourCodeHologram(l4.terminal.x*T,l4.terminal.y*T); // above everything
  levelFourBubble();

@@ -7,7 +7,9 @@ const LEVELS=[
 {name:'Sush, Zoofi & Arqam',title:'THE TRIPLE THREAT',bosses:['sush','zoofi','arqam'],skill:'Quality & Engineering',description:'Zoofi throws bugs. Sush and Arqam reassign their tickets to Diego. Teamwork!',attack:'🐛',speed:1.5},
 {name:'Ali',title:'THE KNOWLEDGE GATEKEEPER',bosses:['ali'],skill:'Documentation & Knowledge Transfer',description:'Ali needs docs, runbooks, and one final knowledge transfer before Diego goes.',attack:'📚',speed:1.65},
 {name:'Zack',title:'THE FINAL BOSS',bosses:['zack'],skill:'AI Leadership',description:'Zack has just one quick request. And another. And another.',attack:'🚨',speed:1.85}];
-// How long Ghost Mode (SPACE) keeps Diego invisible, in seconds (was 2). Cooldown stays 10s.
-const GHOST_TIME=3.5;
+// How long Ghost Mode (SPACE) keeps Diego invisible on each level, in seconds
+// (user request: 2s on Levels 1-2, 3-4s on Levels 3-5). Cooldown stays 10s.
+const GHOST_TIMES=[2,2,3,3.5,4];
+function ghostTime(){return GHOST_TIMES[level]??2}
 // Which level a new game starts on (1-5). 1 = the real game; a higher number jumps straight there for testing.
 const START_LEVEL=1;
