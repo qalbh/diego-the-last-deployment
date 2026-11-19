@@ -22,7 +22,7 @@ let l2=null,l2Layout=null,levelTwoSnapshot=null,levelTwoSceneStep=0;
 const L2_DIRS=[[1,0],[-1,0],[0,1],[0,-1]];
 const l2Key=(x,y)=>y*COLS+x;
 const l2Cell=p=>({x:Math.floor(p.x),y:Math.floor(p.y)});
-function l2Open(x,y){const D=level===2?L3:L2;return x>0&&y>0&&x<D.W-1&&y<D.H-1&&!grid[y][x]} // Level 3 reuses these helpers at its own size
+function l2Open(x,y){const D=level===3?L4:level===2?L3:L2;return x>0&&y>0&&x<D.W-1&&y<D.H-1&&!grid[y][x]} // Levels 3 and 4 reuse these helpers at their own size
 function l2Distances(sx,sy){ // BFS step counts from one cell over walkable tiles
  const dist=new Map([[l2Key(sx,sy),0]]),q=[[sx,sy]];
  for(let i=0;i<q.length;i++){const [x,y]=q[i],d=dist.get(l2Key(x,y));
