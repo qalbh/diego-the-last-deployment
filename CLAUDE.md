@@ -60,7 +60,7 @@ Open `index.html` in Chrome, or use a static server (for example `python3 -m htt
 - **Length:** target ~18 to 23 minutes total (Level 1 2–3, Level 2 3–4, Level 3 4–5, Level 4 4–5, Level 5 5–6). These are **targets**, not measured completion times.
 - **Difficulty:** intentional escalation through coordinated mechanics and hazards, not merely speed; rough aspiration L1 2/10, L2 4/10, L3 6/10, L4 8/10, L5 10/10. Never implement unfair instant kills.
 - **Health:** starts at 100 HP (4 hits). **Each unprotected successful hit costs exactly 25 HP**. Ghost, shield, DND and brief post-hit invulnerability may block hits. At 0 HP show Game Over and offer same-maze retry for Level 1.
-- **Controls:** Arrow keys/WASD for movement, SPACE Ghost Mode lasting 3.5 seconds (`GHOST_TIME` in `js/data/levels.js`, raised from 2s at the user's request on 20 Nov 2026, all levels) with 10-second cooldown, F Flying Chappal with 2.5-second cooldown, P pause; clickable ability buttons, optional on-screen directional controls for touch.
+- **Controls:** Arrow keys/WASD for movement, SPACE Ghost Mode lasting `GHOST_TIMES=[2,2,3,3.5,4]` seconds per level (`ghostTime()` in `js/data/levels.js`, user request 20 Nov 2026) with 10-second cooldown, F Flying Chappal with 2.5-second cooldown, P pause; clickable ability buttons, optional on-screen directional controls for touch.
 - **Flying Chappal:** directional projectile can eliminate snakes/beetles/hazards or projectiles and stun the boss. Haris should not be permanently killed because he must keep chasing. Golden Chappal pickup stuns him longer.
 - **Bosses roam.** Haris pathfinds through maze corridors and follows Diego rather than standing still. Snakes must continually move, choose random paths at junctions and avoid sticking to walls; beetles have a different movement personality (slower patrol then burst near Diego). Enemy projectiles traverse interior walls, but do **not** leak outside the game.
 - **Goal:** collect a golden key and find the exit door; more elaborate objectives can be introduced later. Level 1's key is placed on the guaranteed route toward the exit, and the maze has one unique path to the exit with branch corridors and dead ends to evade Haris.
@@ -301,7 +301,7 @@ At minimum after any change, verify:
 2. Starting the game shows instructions, then skippable three-step Level 1 intro and expected maze layout.
 3. WASD/arrows move Diego; doors/walls block player; Haris, snake and beetle patrol without freezing.
 4. Haris alternates mode before key, switches to Reminder Mode after key; dialogue appears in **center top banner**, not Current Threat nor over maze.
-5. SPACE protects for 3.5 seconds (`GHOST_TIME`) with 10-second cooldown; F throws chappal with 2.5-second cooldown.
+5. SPACE protects for 2s on Levels 1-2 up to 4s on Level 5 (`GHOST_TIMES`) with 10-second cooldown; F throws chappal with 2.5-second cooldown.
 6. Hit removes 25 HP unless protected; at 0 display failure screen; retry uses same layout.
 7. Key activates door; escape triggers cinematic win, then time/health/defeats and Ticket Intelligence.
 8. Tickets remain clipped to viewport; no trails or duplicated walls outside map.
