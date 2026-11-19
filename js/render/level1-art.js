@@ -144,9 +144,9 @@ function levelOneCreature(h){
  ctx.restore();
 }
 function levelOneCharacter(name,x,y,hero){
- ctx.save();if(hero&&level===0){ctx.translate(x,y);ctx.rotate((lastPlayerStep.x||0)*.055*heroAnimation);ctx.translate(-x,-y);}const isMoving=hero?(keys.ArrowUp||keys.ArrowDown||keys.ArrowLeft||keys.ArrowRight||keys.w||keys.a||keys.s||keys.d):true;
+ ctx.save();if(hero&&level<=1){ctx.translate(x,y);ctx.rotate((lastPlayerStep.x||0)*.055*heroAnimation);ctx.translate(-x,-y);}const isMoving=hero?(keys.ArrowUp||keys.ArrowDown||keys.ArrowLeft||keys.ArrowRight||keys.w||keys.a||keys.s||keys.d):true;
  const bounce=isMoving?Math.sin(clock*13+x*.1)*(2+heroAnimation):Math.sin(clock*2+x)*.6;
- const c=hero?['#ffbd65','#c66b2f']:['#75c4e7','#315a9e'];let size=hero?33:35;
+ const c=hero?['#ffbd65','#c66b2f']:(BOSS_JACKETS[name]||['#75c4e7','#315a9e']);let size=hero?33:35;
  ctx.fillStyle='#02081795';ctx.beginPath();ctx.ellipse(x,y+18,15+heroAnimation*2,5,0,0,7);ctx.fill();
  // Feet and shoes with walking cycle.
  for(let side of [-1,1]){const stride=Math.sin(clock*12+side*Math.PI/2)*3;ctx.strokeStyle='#243f59';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x+side*5,y+8);ctx.lineTo(x+side*6+stride,y+17);ctx.stroke();ctx.fillStyle='#f1e8d7';rr(x+side*7-5+stride,y+14,10,5,2);ctx.fill()}

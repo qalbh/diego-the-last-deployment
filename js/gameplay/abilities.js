@@ -1,3 +1,3 @@
 // Player abilities: Ghost Mode (SPACE) and Flying Chappal (F).
-function ghostMode(){if(phase!== 'playing'||paused||ghostCooldown>0)return;ghost=2;ghostCooldown=10;score+=5;if(level===0)burst(player.x*T,player.y*T,'#75d9ff',26,1.1);showPowerText('👻 Diego has left the meeting!');if(level===0)comeback(1);}
-function throwChappal(){if(phase!=='playing'||paused||throwCooldown>0)return;throwCooldown=2.5;if(level===0)burst(player.x*T+facing[0]*T*.3,player.y*T+facing[1]*T*.3,'#ffdb7a',10,.65);let d=facing;throws.push({x:player.x,y:player.y,vx:d[0]*8,vy:d[1]*8,life:1.6});showPowerText('🩴 Take this, production!');}
+function ghostMode(){if(phase!== 'playing'||paused||ghostCooldown>0)return;ghost=2;ghostCooldown=10;score+=5;if(level<=1)burst(player.x*T,player.y*T,'#75d9ff',26,1.1);showPowerText('👻 Diego has left the meeting!');if(level===0)comeback(1);}
+function throwChappal(){if(phase!=='playing'||paused||throwCooldown>0)return;throwCooldown=2.5;if(level<=1)burst(player.x*T+facing[0]*T*.3,player.y*T+facing[1]*T*.3,'#ffdb7a',10,.65);let d=facing;throws.push({x:player.x,y:player.y,vx:d[0]*8,vy:d[1]*8,life:1.6});showPowerText('🩴 Take this, production!');}
