@@ -8,6 +8,8 @@ Build a funny, affectionate, polished, browser-playable 2D arcade farewell game 
 
 > **20 Nov 2026, user decision: the Diego AI / Succession Plan theme is REMOVED from the game** ("it doesn't suit"). No per-level skill unlock or "DIEGO AI MODULE / BUILD PROGRESS" card, victory buttons say "▶ SEE RESULTS", and Level 5's results go straight to the Memory Wall, then the laughing-GIF send-off. Mentions of skills, modules, Diego AI or the Succession Plan elsewhere in this document are historical; do not reintroduce them. (`LEVELS[].skill` and `unlocked` still exist in data but are not shown.)
 
+> **20 Nov 2026, funny victory conversations (user request):** each level's victory chat (`victoryChat()` in `js/ui/overlay.js`) keeps the bosses' REAL quotes from `QUOTES` and adds new Diego comeback lines written for the game: L1 "Update: Diego has left the building. 🏃", L2 "Sure Jake. Put it in my backlog. I'll get to it… never. 😎", L3 keeps the real "Mom Zoofi", L4 "The runbook is in the repo. Somewhere. Good luck! 😇", L5 "My out-of-office says: adiós. 🌴". Diego rows carry class `diego-line` (highlighted).
+
 ## 1. Rules of engagement for the coding agent
 
 1. **Do not rebuild from scratch.** Work on the current self-contained HTML/CSS/JavaScript Canvas game in `index.html`.
