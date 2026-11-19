@@ -30,7 +30,7 @@ The scripts are plain `<script>` tags (not ES modules) that share one global sco
 - Five levels: 1) Haris (Ticket Master), 2) Eren & Jake (Project Guardians), 3) Zoofi, Sush & Arqam (bugs and ticket reassignments), 4) Ali (engineering handover), 5) Zack (final boss).
 - Level 1 is the most developed and visually polished. It uses a compact maze, golden key, locked exit, health (100 HP, 25 per hit), pursuing boss, roaming snakes and beetles, Ghost Mode (SPACE), Flying Chappal (F), power-ups, dialogue, cutscenes, and a skill-unlock finale.
 - WASD/arrow keys move, P pauses. Opening tutorial shows controls.
-- Character photo portraits are embedded as data URLs.
+- Character photos are in `assets/photos/` (loaded by relative path, works offline).
 - `index.html` is the pre-optimization restored version. A prior attempt to cache static rendering introduced severe graphical corruption; do not blindly reintroduce that change.
 
 ## Safe development workflow
