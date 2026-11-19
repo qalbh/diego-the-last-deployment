@@ -9,7 +9,7 @@
 //
 // Flow: fix 2 production INCIDENTS -> the golden key unlocks -> grab it ->
 // SURPRISE PROMO PROJECT + "YOU WILL NEVER ESCAPE US" -> exit -> victory ->
-// Diego Succession Plan -> Memory Wall.
+// Diego Succession Plan -> Memory Wall -> final laughing-GIF send-off.
 // Zack's phases:
 //  1 "ARE YOU AVAILABLE?" (start): patrols and chases, 🚨 shots, URGENT pings.
 //  2 "URGENT" (after the first incident is fixed): red alarms, faster, and his
@@ -307,6 +307,16 @@ function memoryWall(){
  const cards=MEMORIES.people.map((p,i)=>`<figure class="memory-card${p.id==='diego'?' memory-hero':''}" style="--d:${i*.08}s"><img src="${PHOTOS[p.id]}" alt="${esc(p.name)}"><figcaption><b>${esc(p.name)}</b><small>${esc(p.role)}</small><q>${esc(line(p))}</q></figcaption></figure>`).join('');
  const shots=(MEMORIES.screenshots||[]).map(s=>`<figure class="memory-shot"><img src="${esc(s.src)}" alt="${esc(s.caption||'')}"><figcaption>${esc(s.caption||'')}</figcaption></figure>`).join('');
  show(`<div class="memory-wall"><div class="cinematic-kicker">THANK YOU, DIEGO</div><h2 class="memory-title">💜 THE MEMORY WALL</h2><p class="memory-intro">Thanks for the fixes, the experiments, the teamwork, and every time you showed up for Brij. We wish you the very best on your next adventure!</p><div class="memory-grid">${cards}</div>${shots?`<div class="memory-shots">${shots}</div>`:''}<p class="memory-farewell"><b>DIEGO:</b> “${QUOTES.diego.defeated[0]}”</p><div class="memory-end">GAME COMPLETE · EXIT APPROVED ✈️</div></div>`);
+ sceneButtons('😂 ONE LAST THING...',finalEscape,false);
+ panel.classList.add('finale-panel');
+}
+
+// ---- The very last screen: Diego, laughing, out of the building -------------
+function finalEscape(){
+ phase='final';victoryFanfare();
+ const palette=['#c77aff','#ffda65','#ff6b91','#7ff5ea','#8dffc0'];
+ const confetti=Array.from({length:60},(_,i)=>`<i class="victory-confetti" style="--x:${(i*47+13)%100}%;--delay:${(i*0.19)%2.4}s;--duration:${3.1+(i%7)*0.33}s;--tilt:${(i%2?1:-1)*(35+i%5*17)}deg;--color:${palette[i%palette.length]}"></i>`).join('');
+ show(`<div class="final-escape"><div class="victory-particles" aria-hidden="true">${confetti}</div><div class="cinematic-kicker">ALL 5 LEVELS COMPLETE · STATUS: OUT OF OFFICE (FOREVER)</div><div class="final-gif"><img src="${REACTIONS.happy}" alt="Diego laughing"></div><h2 class="final-headline">DIEGO HAS FINALLY<br><em>ESCAPED!</em></h2><p class="final-quote">“...and he is already on his way to start his own venture. 🚀”</p><p class="final-joke">First hire: Diego AI v1.0. Second hire: whoever closes all those tickets. 😂</p></div>`);
  sceneButtons('↻ PLAY AGAIN FROM LEVEL 1',()=>{score=0;unlocked=[];startLevel(0)},false);
  panel.classList.add('finale-panel');
 }
