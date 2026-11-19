@@ -238,3 +238,9 @@ aside.side-panel{display:flex!important}
  .side-dialogue .marquee-bar .dialogue-copy span,.side-dialogue .marquee-bar.talking .dialogue-copy span{-webkit-line-clamp:3}
 }
 @media(max-width:900px){.notice-lane.side-notices{flex:1 1 200px}}
+
+/* Diego reaction GIFs. Cropped to 3:2 (object-fit: cover) so the sad GIF's
+   black side bars never show. */
+.victory-faceoff .reaction-person img.reaction-gif{width:210px;height:140px;border-radius:16px;object-fit:cover;border:3px solid #80eac7}
+.panel .defeat-reaction{width:min(300px,80%);aspect-ratio:3/2;margin:10px auto 14px;border-radius:16px;overflow:hidden;border:3px solid #ff6b91;box-shadow:0 0 35px #fa627466;animation:portrait-pop .55s both}
+.panel .defeat-reaction img{display:block;width:100%;height:100%;object-fit:cover}

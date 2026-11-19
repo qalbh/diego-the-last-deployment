@@ -12,3 +12,6 @@ const PHOTOS={
  "zack": "assets/photos/zack.jpg"
 };
 const faces={};Object.entries(PHOTOS).forEach(([k,src])=>{let im=new Image();im.src=src;faces[k]=im});
+// Diego reaction GIFs: happy plays when he escapes, sad on game over.
+const REACTIONS={happy:'assets/photos/happy.gif',sad:'assets/photos/sad.gif'};
+Object.values(REACTIONS).forEach(src=>{new Image().src=src});
