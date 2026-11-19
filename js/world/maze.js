@@ -2,6 +2,7 @@
 function reachable(a,sx,sy){let seen=new Set([sy*COLS+sx]),queue=[[sx,sy]];for(let i=0;i<queue.length;i++){let [x,y]=queue[i];for(let [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){let nx=x+dx,ny=y+dy,k=ny*COLS+nx;if(nx>0&&nx<COLS-1&&ny>0&&ny<ROWS-1&&!a[ny][nx]&&!seen.has(k)){seen.add(k);queue.push([nx,ny])}}}return seen}
 function createMaze(n){
  if(n===1)return createLevelTwoMaze();
+ if(n===2)return createLevelThreeMaze();
  if(n!==0){let a=Array.from({length:ROWS},(_,y)=>Array.from({length:COLS},(_,x)=>x===0||y===0||x===COLS-1||y===ROWS-1?1:0));for(let y=2;y<ROWS-2;y+=3)for(let x=2;x<COLS-2;x++)if((x*7+y*11+n)%6===0)a[y][x]=1;for(let x=4;x<COLS-2;x+=5)for(let y=2;y<ROWS-2;y++)if((y+x+n)%5===0)a[y][x]=1;let px=1,py=1;while(px<COLS-3)a[py][++px]=0;while(py<ROWS-3)a[++py][px]=0;exitCell={x:COLS-3,y:ROWS-3};return a}
  // Level 1 is a compact perfect maze: exactly one route to the exit,
  // with many side branches to dodge Haris and escape his projectiles.

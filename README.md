@@ -18,8 +18,10 @@ js/audio/sound.js           synthesized arcade sounds
 js/world/maze.js            maze generation, routing, Level 1 placement, wall/distance helpers
 js/ui/                      overlay.js, dialogue.js, hud.js, menus.js
 js/levels/level1-story.js   Level 1 intro, victory, results, same-maze retry
+js/levels/level2.js         Level 2 (Eren & Jake): maze, mechanics, bosses, cutscenes
+js/levels/level3.js         Level 3 (Zoofi, Sush & Arqam): release checklist, release chain, fire vents
 js/gameplay/                pickups.js, enemies.js, combat.js, abilities.js
-js/render/                  effects.js, level1-art.js, characters.js, draw.js
+js/render/                  effects.js, level1-art.js, level2-art.js, level3-art.js, characters.js, draw.js
 js/main.js                  game loop and boot (loaded last)
 ```
 

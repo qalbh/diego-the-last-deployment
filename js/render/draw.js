@@ -1,5 +1,5 @@
 // Main draw pass for every frame.
-function draw(){if(level===1){drawLevelTwo();return}let th=THEMES[level];ctx.fillStyle=th.sky;ctx.fillRect(0,0,800,576);
+function draw(){if(level===1){drawLevelTwo();return}if(level===2){drawLevelThree();return}let th=THEMES[level];ctx.fillStyle=th.sky;ctx.fillRect(0,0,800,576);
 // Each world has its own scenery, palette and atmosphere.
 if(level===0)levelOneScenery();
 if(level===1){ctx.fillStyle='#e6b5fa22';for(let i=0;i<13;i++){ctx.fillRect(i*70,25,35,6);ctx.fillRect(i*70+15,25,5,90)}}

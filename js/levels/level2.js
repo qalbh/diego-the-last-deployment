@@ -22,7 +22,7 @@ let l2=null,l2Layout=null,levelTwoSnapshot=null,levelTwoSceneStep=0;
 const L2_DIRS=[[1,0],[-1,0],[0,1],[0,-1]];
 const l2Key=(x,y)=>y*COLS+x;
 const l2Cell=p=>({x:Math.floor(p.x),y:Math.floor(p.y)});
-function l2Open(x,y){return x>0&&y>0&&x<L2.W-1&&y<L2.H-1&&!grid[y][x]}
+function l2Open(x,y){const D=level===2?L3:L2;return x>0&&y>0&&x<D.W-1&&y<D.H-1&&!grid[y][x]} // Level 3 reuses these helpers at its own size
 function l2Distances(sx,sy){ // BFS step counts from one cell over walkable tiles
  const dist=new Map([[l2Key(sx,sy),0]]),q=[[sx,sy]];
  for(let i=0;i<q.length;i++){const [x,y]=q[i],d=dist.get(l2Key(x,y));
@@ -31,8 +31,11 @@ function l2Distances(sx,sy){ // BFS step counts from one cell over walkable tile
 }
 
 // ---- Maze -------------------------------------------------------------------
-function createLevelTwoMaze(){
- const W=L2.W,H=L2.H,a=Array.from({length:ROWS},()=>Array(COLS).fill(1));
+function createLevelTwoMaze(){return braidedMaze(L2.W,L2.H,.7,4)}
+// DFS maze, then most dead ends knocked through into loops, plus a few shortcuts.
+// Shared by Level 2 and Level 3 (different sizes and amounts of braiding).
+function braidedMaze(W,H,braid,shortcutCount){
+ const a=Array.from({length:ROWS},()=>Array(COLS).fill(1));
  const stack=[[1,1]];a[1][1]=0;
  while(stack.length){const [x,y]=stack[stack.length-1];
   const options=[[2,0],[-2,0],[0,2],[0,-2]].filter(([dx,dy])=>x+dx>0&&x+dx<W-1&&y+dy>0&&y+dy<H-1&&a[y+dy][x+dx]===1);
@@ -43,7 +46,7 @@ function createLevelTwoMaze(){
  const inside=(x,y)=>x>0&&y>0&&x<W-1&&y<H-1;
  for(let y=1;y<H-1;y+=2)for(let x=1;x<W-1;x+=2){
   const open=L2_DIRS.filter(([dx,dy])=>a[y+dy][x+dx]===0).length;
-  if(open!==1||Math.random()>.7)continue;
+  if(open!==1||Math.random()>braid)continue;
   const walls=L2_DIRS.filter(([dx,dy])=>a[y+dy][x+dx]===1&&inside(x+dx*2,y+dy*2));
   if(walls.length){const [dx,dy]=walls[Math.floor(Math.random()*walls.length)];a[y+dy][x+dx]=0}
  }
@@ -52,7 +55,7 @@ function createLevelTwoMaze(){
   const horiz=a[y][x-1]===0&&a[y][x+1]===0&&a[y-1][x]===1&&a[y+1][x]===1;
   const vert=a[y-1][x]===0&&a[y+1][x]===0&&a[y][x-1]===1&&a[y][x+1]===1;
   if(horiz||vert)shortcuts.push([x,y]);}
- shortcuts.sort(()=>Math.random()-.5).slice(0,4).forEach(([x,y])=>a[y][x]=0);
+ shortcuts.sort(()=>Math.random()-.5).slice(0,shortcutCount).forEach(([x,y])=>a[y][x]=0);
  // Exit: the open cell farthest (in steps) from Diego's start.
  const q=[[1,1,0]],seen=new Set([l2Key(1,1)]);let far=q[0];
  for(let i=0;i<q.length;i++){const [x,y,d]=q[i];if(d>far[2])far=q[i];
@@ -324,7 +327,7 @@ function levelTwoVictoryScene(){
   return `<i class="victory-confetti" style="--x:${left}%;--delay:${delay}s;--duration:${duration}s;--tilt:${(i%2?1:-1)*(35+i%5*17)}deg;--color:${palette[i%palette.length]}"></i>`;
  }).join('');
  const bursts=Array.from({length:3},(_,j)=>`<div class="victory-firework firework-${j+1}">${Array.from({length:12},(_,i)=>`<b style="--angle:${i*30}deg;--distance:${62+j*20}px;--delay:${j*.35}s"></b>`).join('')}</div>`).join('');
- show(`<div class="victory-experience"><div class="victory-particles" aria-hidden="true">${confetti}${bursts}</div><div class="victory-orbit" aria-hidden="true"></div><div class="victory-kicker"><span class="victory-status-light"></span> MISSION 02 COMPLETE <span class="victory-separator">/</span> SPRINT APPROVED</div><div class="victory-medal" aria-hidden="true">🏆</div><h2 class="victory-headline">DIEGO HAS<br><em>ESCAPED!</em></h2><div class="victory-ribbon"><span>📅 SPRINT PLANNING</span><strong>DEFEATED</strong><span>🚪 FREEDOM UNLOCKED</span></div><div class="victory-faceoff">${scenePortrait('eren')}${scenePortrait('jake')}<div class="victory-vs">VS <span>✓</span></div><div class="scene-person reaction-person"><img class="reaction-gif" src="${REACTIONS.happy}" alt="Diego laughing"><span>DIEGO</span></div></div><div class="victory-conversation"><p><b>EREN</b><span>“${QUOTES.eren.defeated[0]}”</span></p><p><b>JAKE</b><span>“${QUOTES.jake.defeated[0]}”</span></p></div><div class="victory-tagline">Two sign-offs. Zero extra sprints.</div><div class="victory-next-label">THE NEXT CHAPTER IS READY</div></div>`);
+ show(`<div class="victory-experience"><div class="victory-particles" aria-hidden="true">${confetti}${bursts}</div><div class="victory-orbit" aria-hidden="true"></div><div class="victory-kicker"><span class="victory-status-light"></span> MISSION 02 COMPLETE <span class="victory-separator">/</span> SPRINT APPROVED</div><div class="victory-medal" aria-hidden="true">🏆</div><h2 class="victory-headline">DIEGO HAS<br><em>ESCAPED!</em></h2><div class="victory-ribbon"><span>📅 SPRINT PLANNING</span><strong>DEFEATED</strong><span>🚪 FREEDOM UNLOCKED</span></div><div class="victory-faceoff">${scenePortrait('eren')}${scenePortrait('jake')}<div class="victory-vs">VS <span>✓</span></div><div class="scene-person reaction-person"><img class="reaction-gif" src="${REACTIONS.happy}" alt="Diego laughing"><span>DIEGO</span></div></div><div class="victory-conversation"><p><b>EREN</b><span>“${QUOTES.eren.defeated[0]}”</span></p><p><b>JAKE</b><span>“${QUOTES.jake.defeated[0]}”</span></p></div><div class="victory-tagline">One sign-off. Zero extra sprints.</div><div class="victory-next-label">THE NEXT CHAPTER IS READY</div></div>`);
  sceneButtons('✨ UNLOCK DIEGO AI SKILL',levelTwoResults,false);
  panel.classList.add('victory-panel');
 }

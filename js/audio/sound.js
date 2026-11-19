@@ -31,7 +31,7 @@ function victoryFanfare(){try{
 const STEP_EVERY=.7; // tiles travelled per chomp
 let stepDistance=STEP_EVERY,stepAlt=false;
 function footstep(moved){
- if(level>1||phase!=='playing')return;
+ if(level>2||phase!=='playing')return;
  if(!moved){stepDistance=STEP_EVERY;return} // next move chomps immediately
  stepDistance+=moved;if(stepDistance<STEP_EVERY)return;
  stepDistance=0;stepAlt=!stepAlt;
