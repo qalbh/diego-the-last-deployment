@@ -1,0 +1,8 @@
+# Files kept in the repo but not published on the website.
+CLAUDE.md
+Chat.md
+ANTIGRAVITY_PROMPT.txt
+README.md
+# Original memory photos (the game uses the small copies in assets/memories/web/)
+assets/memories/*.png
+.DS_Store
