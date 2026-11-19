@@ -111,7 +111,7 @@ function startLevelTwo(retrySame){
  goldenKey=null;hasGoldenKey=false;
  l2={signoffs:l2Layout.signoffs.map(s=>({...s,taken:false})),keySpot:l2Layout.keySpot,traps:l2Layout.traps,
      barriers:[],deadline:null,nextDeadline:7,nextBarrier:5.5,sprint:false,enrage:0,onTrap:false,bubble:null,
-     deadlinesMet:0,deadlinesMissed:0,firstBarrier:true};
+     deadlinesMet:0,deadlinesMissed:0,firstBarrier:true,lockHintCd:0};
  phase='cutscene';levelTwoSceneStep=retrySame?2:0;renderLevelTwoIntro();
 }
 
@@ -151,12 +151,18 @@ function updateLevelTwo(dt){
   const n=l2SignoffsTaken();
   if(n<s.signoffs.length)showPowerText(`✅ STAKEHOLDER SIGN-OFF ${n}/${s.signoffs.length}!`);
   else{goldenKey={...s.keySpot};arcadeSound('key');burst(goldenKey.x*T,goldenKey.y*T,'#ffe18b',30,1.3);
-   showPowerText('✅ BOTH SIGN-OFFS IN! 🔑 The golden key has appeared');}
+   showPowerText('✅ BOTH SIGN-OFFS IN! 🔑 The golden key is unlocked');}
  }
  if(goldenKey&&!hasGoldenKey&&distance(player,goldenKey)<.5){
   hasGoldenKey=true;doorAnimation=1.25;burst(player.x*T,player.y*T,'#ffe18b',34,1.5);goldenKey=null;score+=100;arcadeSound('key');
   startSprintReview();
  }
+ // The key is visible from the start but locked until both sign-offs are in.
+ s.lockHintCd=Math.max(0,s.lockHintCd-dt);
+ if(s.lockHintCd===0&&!goldenKey&&!hasGoldenKey&&distance(player,s.keySpot)<.6){
+  showPowerText(`🔒 KEY LOCKED! Collect ${s.signoffs.length-l2SignoffsTaken()} more ✅ sign-off${s.signoffs.length-l2SignoffsTaken()===1?'':'s'} to unlock it`);s.lockHintCd=2.5}
+ if(s.lockHintCd===0&&!hasGoldenKey&&Math.hypot(player.x-(exitCell.x+.5),player.y-(exitCell.y+.5))<.8){
+  showPowerText('🚪 EXIT LOCKED! Get the golden key first');s.lockHintCd=2.5}
  pickups=pickups.filter(p=>{if(distance(player,p)<.46){burst(p.x*T,p.y*T,'#fff0aa',14,.7);collectPickup(p.type);return false}return true});
  // Eren's deadlines (only before the key; the Sprint Review is its own climax).
  if(!s.sprint){
@@ -286,7 +292,7 @@ function levelTwoQuest(){
  if(!l2)return '';
  if(l2.deadline)return `⏰ <b>DEADLINE ${Math.ceil(l2.deadline.time)}s</b> · Reach Eren's status update`;
  const n=l2SignoffsTaken();
- if(n<l2.signoffs.length)return `✅ <b>SIGN-OFFS ${n}/${l2.signoffs.length}</b> · Collect stakeholder approvals`;
+ if(n<l2.signoffs.length)return `🔒 <b>KEY LOCKED</b> · Collect ✅ sign-offs (${n}/${l2.signoffs.length}) to unlock it`;
  if(!hasGoldenKey)return '🔑 <b>KEY UNLOCKED</b> · Grab the golden key';
  return '🏃 <b>SPRINT REVIEW</b> · Reach the exit!';
 }
@@ -300,7 +306,7 @@ function renderLevelTwoIntro(){
   show(`<div class="scene-label">STANDUP IS RUNNING LONG</div><div class="scene-people">${scenePortrait('eren')}${scenePortrait('jake')}</div><div class="scene-card"><p class="scene-quote">EREN: “${QUOTES.eren.attack[1]}”</p><p class="scene-quote">JAKE: “${QUOTES.jake.attack[1]}”</p></div><small>Two PMs have entered the chat. Escape status: blocked.</small>`);
   sceneButtons('CONTINUE ▶',()=>{levelTwoSceneStep=2;renderLevelTwoIntro()},true,beginLevelTwo);
  }else{
-  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 2: SURVIVE SPRINT PLANNING!</h2><p>✅ Collect 2 sign-offs · 🔑 Grab the golden key · 🚪 Reach the exit</p><small>Watch out: ⏰ Eren's deadlines · 📋 Jake's barriers (🩴 breaks them) · 🌀 scope creep slows you down</small>`);
+  show(`<div class="scene-label">DIEGO HAS A PLAN</div><div class="scene-people">${scenePortrait('diego')}</div><div class="scene-card"><p class="scene-quote">“${QUOTES.diego.attack[0]}”</p></div><h2>MISSION 2: SURVIVE SPRINT PLANNING!</h2><p>✅ Collect 2 sign-offs to unlock the 🔑 golden key · 🔑 Grab it · 🚪 Unlock the exit</p><small>Watch out: ⏰ Eren's deadlines · 📋 Jake's barriers (🩴 breaks them) · 🌀 scope creep slows you down</small>`);
   sceneButtons('▶ BEGIN LEVEL 2',beginLevelTwo,false);
  }
 }
@@ -308,6 +314,7 @@ function beginLevelTwo(){
  if(level!==1)return;
  phase='playing';hide();dialogueCooldown=2.2;
  document.getElementById('dialogue').style.display='none';updateUI();
+ showPowerText('🔒 The golden key is locked. Collect 2 ✅ sign-offs to unlock it');
  setTimeout(()=>{if(phase==='playing'&&level===1)speak('eren',true,'intro')},900);
 }
 function levelTwoVictoryScene(){

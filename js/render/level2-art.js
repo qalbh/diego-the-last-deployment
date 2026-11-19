@@ -90,8 +90,9 @@ function levelTwoTrap(t){
 }
 
 function levelTwoSignoff(s){
- // Stakeholder sign-off: a green approval card with a check mark.
+ // Stakeholder sign-off: a green approval card with a check mark and a pulsing glow ring.
  const x=s.x*T,y=s.y*T+Math.sin(clock*4+s.x)*2;
+ ring(x,y,'#5dffb0',(clock*.8+s.x)%1,14);
  ctx.save();ctx.translate(x,y);ctx.shadowColor='#5dffb0';ctx.shadowBlur=14;
  ctx.fillStyle='#2fcf88';rr(-12,-13,24,26,6);ctx.fill();ctx.shadowBlur=0;
  ctx.strokeStyle='#eafff3';ctx.lineWidth=1.8;ctx.stroke();
@@ -101,6 +102,22 @@ function levelTwoSignoff(s){
  ctx.restore();
 }
 
+function levelTwoLockedKey(){
+ // The golden key waits in place from the start, glowing behind a padlock, with
+ // one slot per sign-off that lights up as Diego collects them.
+ const k=l2.keySpot,x=k.x*T,y=k.y*T,n=l2SignoffsTaken(),pulse=.5+.5*Math.sin(clock*3);
+ ctx.save();
+ const halo=ctx.createRadialGradient(x,y,4,x,y,30);halo.addColorStop(0,`rgba(255,215,110,${.35+.2*pulse})`);halo.addColorStop(1,'rgba(255,215,110,0)');
+ ctx.fillStyle=halo;ctx.beginPath();ctx.arc(x,y,30,0,7);ctx.fill();
+ ctx.strokeStyle='#ffe18b';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-clock*8;ctx.beginPath();ctx.arc(x,y,18,0,7);ctx.stroke();ctx.setLineDash([]);
+ ctx.restore();
+ ctx.save();ctx.globalAlpha=.8;levelOneCollectible(x,y,'key');ctx.restore();
+ ctx.save();
+ ctx.fillStyle='#5b2a8c';rr(x+2,y+2,17,14,3);ctx.fill();ctx.strokeStyle='#ffe18b';ctx.lineWidth=2;ctx.stroke();
+ ctx.beginPath();ctx.arc(x+10.5,y+2,4.6,Math.PI,0);ctx.stroke();ctx.fillStyle='#ffe18b';ctx.beginPath();ctx.arc(x+10.5,y+8,2,0,7);ctx.fill();ctx.fillRect(x+9.7,y+8,1.6,4);
+ for(let i=0;i<l2.signoffs.length;i++){ctx.fillStyle=i<n?'#5dffb0':'#ffffff40';ctx.strokeStyle='#1b0f33';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x-6+i*12,y-24,4,0,7);ctx.fill();ctx.stroke()}
+ ctx.restore();
+}
 function levelTwoDeadlineSpot(d){
  // Eren's status-update tile, with a countdown ring (no text on the maze).
  const x=d.x*T,y=d.y*T,f=Math.max(0,d.time/d.max),urgent=f<.35,pulse=.5+.5*Math.sin(clock*(urgent?14:6));
@@ -151,7 +168,7 @@ function drawLevelTwo(){
  for(const t of l2.traps)levelTwoTrap(t);
  for(const c of coins){ctx.fillStyle='#ffcf7a';ctx.beginPath();ctx.arc(c.x*T,c.y*T,4+Math.sin(clock*5+c.x)*1.2,0,Math.PI*2);ctx.fill()}
  for(const s of l2.signoffs)if(!s.taken)levelTwoSignoff(s);
- if(goldenKey&&!hasGoldenKey)levelOneCollectible(goldenKey.x*T,goldenKey.y*T,'key');
+ if(goldenKey&&!hasGoldenKey)levelOneCollectible(goldenKey.x*T,goldenKey.y*T,'key');else if(!hasGoldenKey)levelTwoLockedKey();
  for(const p of pickups)levelOneCollectible(p.x*T,p.y*T,p.type);
  if(l2.deadline)levelTwoDeadlineSpot(l2.deadline);
  for(const b of l2.barriers)levelTwoBarrier(b);
