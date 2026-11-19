@@ -7,3 +7,5 @@ const LEVELS=[
 {name:'Sush, Zoofi & Arqam',title:'THE TRIPLE THREAT',bosses:['sush','zoofi','arqam'],skill:'Quality & Engineering',description:'Zoofi throws bugs. Sush and Arqam reassign their tickets to Diego. Teamwork!',attack:'🐛',speed:1.5},
 {name:'Ali',title:'THE KNOWLEDGE GATEKEEPER',bosses:['ali'],skill:'Documentation & Knowledge Transfer',description:'Ali needs docs, runbooks, and one final knowledge transfer before Diego goes.',attack:'📚',speed:1.65},
 {name:'Zack',title:'THE FINAL BOSS',bosses:['zack'],skill:'AI Leadership',description:'Zack has just one quick request. And another. And another.',attack:'🚨',speed:1.85}];
+// Which level a new game starts on (1-5). Set to 2 while playtesting Level 2; set back to 1 for the real game.
+const START_LEVEL=2;
