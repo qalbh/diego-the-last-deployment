@@ -67,7 +67,7 @@ Open `index.html` in Chrome, or use a static server (for example `python3 -m htt
 
 ### Level 1: Haris, THE TICKET MASTER
 
-**Status: working, designed and repeatedly user-approved; preserve.** Still perform regression tests before labeling production-ready. Theme `ASANA BACKLOG`, visual caption Brij Ticket Division. Haris is a project/program manager with endless ticket reminders. The user originally said Jira tickets, but the working code describes Asana tickets and Brij uses Asana. **Do not silently rename**; ask if the branding matters.
+**Status: working, designed and repeatedly user-approved; preserve.** **19 Nov 2026: user declared Level 1 DONE** after adding: alternating "chomp" step sound while Diego moves (`footstep` in `js/audio/sound.js`), a night-sky backdrop (stars, moon, shooting star, skyline; `levelOneNightSky`), the left-sidebar layout, and an original ~2s victory fanfare on escape (`victoryFanfare`, called from `levelOneVictoryScene`). Do not change Level 1 further unless the user asks. Still perform regression tests before labeling production-ready. Theme `ASANA BACKLOG`, visual caption Brij Ticket Division. Haris is a project/program manager with endless ticket reminders. The user originally said Jira tickets, but the working code describes Asana tickets and Brij uses Asana. **Do not silently rename**; ask if the branding matters.
 
 **Maze:** compact generated perfect maze, active ~15x13 tiles inside larger canvas; single unique solution route and multiple side branches. Random layout on fresh attempt; snapshot and exact layout reused on retry. One key on main route, locked exit until key collected. Scattered collectible data fragments provide score but are not mandatory for escape.
 

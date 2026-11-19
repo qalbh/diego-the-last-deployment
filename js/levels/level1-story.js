@@ -30,7 +30,7 @@ function restoreLevelOneState(){
 }
 function replayLevelOne(){startLevel(0,true)}
 function levelOneVictoryScene(){
- phase='victoryScene';arcadeSound('win');
+ phase='victoryScene';victoryFanfare();
  const palette=['#6ff6c1','#a8b8ff','#ffdf7d','#79d6ff','#ff9cba'];
  const confetti=Array.from({length:46},(_,i)=>{
    const left=(i*47+13)%100,delay=(i*0.19)%2.4, duration=3.1+(i%7)*0.33;
