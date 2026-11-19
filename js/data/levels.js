@@ -9,5 +9,5 @@ const LEVELS=[
 {name:'Zack',title:'THE FINAL BOSS',bosses:['zack'],skill:'AI Leadership',description:'Zack has just one quick request. And another. And another.',attack:'🚨',speed:1.85}];
 // How long Ghost Mode (SPACE) keeps Diego invisible, in seconds (was 2). Cooldown stays 10s.
 const GHOST_TIME=3.5;
-// Which level a new game starts on (1-5). Set to 4 while playtesting Level 4; set back to 1 for the real game.
-const START_LEVEL=4;
+// Which level a new game starts on (1-5). Set to 5 while playtesting Level 5; set back to 1 for the real game.
+const START_LEVEL=5;

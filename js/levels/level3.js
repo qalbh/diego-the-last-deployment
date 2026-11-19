@@ -120,7 +120,7 @@ function l3Goal(){ // the tile Diego needs to reach next
 }
 // Fire vent cycle: off -> smoke warning (1s) -> flames (1.6s). Faster after GO LIVE.
 function l3VentState(v){
- const period=l3&&l3.live?5:6,t=(clock+v.offset)%period;
+ const period=level===2&&l3&&l3.live?5:6,t=(clock+v.offset)%period;
  return t<period-2.6?'off':t<period-1.6?'warn':'fire';
 }
 function l3Blockers(){return hazards.filter(h=>h.blocker&&!h.dead)}

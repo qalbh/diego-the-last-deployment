@@ -12,7 +12,7 @@ Open `index.html` in a browser, or serve the folder locally (e.g. `python3 -m ht
 index.html                  HUD markup + script tags (load order matters)
 css/styles.css              all styling
 assets/photos/*.jpg         the nine character photos
-js/data/                    photos.js, dialogue.js (QUOTES, comebacks, hit jokes), levels.js (LEVELS, THEMES)
+js/data/                    photos.js, dialogue.js (QUOTES, comebacks, hit jokes), memories.js (Memory Wall messages), levels.js (LEVELS, THEMES)
 js/core/                    state.js, progression.js (startLevel, win, finale), update.js, input.js
 js/audio/sound.js           synthesized arcade sounds
 js/world/maze.js            maze generation, routing, Level 1 placement, wall/distance helpers
@@ -21,8 +21,9 @@ js/levels/level1-story.js   Level 1 intro, victory, results, same-maze retry
 js/levels/level2.js         Level 2 (Eren & Jake): maze, mechanics, bosses, cutscenes
 js/levels/level3.js         Level 3 (Zoofi, Sush & Arqam): release checklist, release chain, fire vents
 js/levels/level4.js         Level 4 (Ali): runbook pages, security terminal code, firewall gates, hackers, electrified water
+js/levels/level5.js         Level 5 (Zack): incidents, boss phases, shockwaves, surprise promos, Succession Plan, Memory Wall
 js/gameplay/                pickups.js, enemies.js, combat.js, abilities.js
-js/render/                  effects.js, level1-art.js, level2-art.js, level3-art.js, level4-art.js, characters.js, draw.js
+js/render/                  effects.js, level1-art.js, level2-art.js, level3-art.js, level4-art.js, level5-art.js, characters.js, draw.js
 js/main.js                  game loop and boot (loaded last)
 ```
 

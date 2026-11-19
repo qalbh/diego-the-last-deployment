@@ -1,5 +1,5 @@
 // Overlay panel helpers used by menus and cutscenes.
-function show(html){panel.classList.remove('victory-panel');panel.innerHTML=html;ov.classList.remove('hidden')}function hide(){ov.classList.add('hidden')};function button(text,fn){let b=document.createElement('button');b.className='btn';b.textContent=text;b.onclick=fn;panel.appendChild(b)}
+function show(html){panel.classList.remove('victory-panel','finale-panel');panel.innerHTML=html;ov.classList.remove('hidden')}function hide(){ov.classList.add('hidden')};function button(text,fn){let b=document.createElement('button');b.className='btn';b.textContent=text;b.onclick=fn;panel.appendChild(b)}
 function scenePortrait(name){return `<div class="scene-person"><img alt="${name}" src="${PHOTOS[name]}"><span>${name.toUpperCase()}</span></div>`;}
 function sceneButtons(primary, action, allowSkip=true, skipAction=beginLevelOne){
  const row=document.createElement('div');row.className='scene-actions';
