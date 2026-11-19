@@ -299,17 +299,7 @@ function successionPlan(){
  panel.classList.add('finale-panel');
 }
 
-// ---- Memory Wall --------------------------------------------------------------
-function memoryWall(){
- phase='final';
- const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- const line=p=>p.message||(p.id==='diego'?QUOTES.diego.intro[0]:(QUOTES[p.id]?.defeated?.[0]||''));
- const cards=MEMORIES.people.map((p,i)=>`<figure class="memory-card${p.id==='diego'?' memory-hero':''}" style="--d:${i*.08}s"><img src="${PHOTOS[p.id]}" alt="${esc(p.name)}"><figcaption><b>${esc(p.name)}</b><small>${esc(p.role)}</small><q>${esc(line(p))}</q></figcaption></figure>`).join('');
- const shots=(MEMORIES.screenshots||[]).map(s=>`<figure class="memory-shot"><img src="${esc(s.src)}" alt="${esc(s.caption||'')}"><figcaption>${esc(s.caption||'')}</figcaption></figure>`).join('');
- show(`<div class="memory-wall"><div class="cinematic-kicker">THANK YOU, DIEGO</div><h2 class="memory-title">💜 THE MEMORY WALL</h2><p class="memory-intro">Thanks for the fixes, the experiments, the teamwork, and every time you showed up for Brij. We wish you the very best on your next adventure!</p><div class="memory-grid">${cards}</div>${shots?`<div class="memory-shots">${shots}</div>`:''}<p class="memory-farewell"><b>DIEGO:</b> “${QUOTES.diego.defeated[0]}”</p><div class="memory-end">GAME COMPLETE · EXIT APPROVED ✈️</div></div>`);
- sceneButtons('😂 ONE LAST THING...',finalEscape,false);
- panel.classList.add('finale-panel');
-}
+// ---- Memory Wall: see js/ui/memory-wall.js (content in js/data/memories.js) ----
 
 // ---- The very last screen: Diego, laughing, out of the building -------------
 function finalEscape(){

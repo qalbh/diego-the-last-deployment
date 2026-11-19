@@ -303,3 +303,60 @@ aside.side-panel{display:flex!important}
 .final-joke{font-size:14px;color:#c9bfe6;margin:4px auto 6px;max-width:520px}
 @media(prefers-reduced-motion:reduce){.final-gif{animation:none}}
 .overlay .panel.finale-panel:has(.final-escape){overflow:visible}
+
+/* ---- Memory Wall (js/ui/memory-wall.js) ---- */
+.overlay .panel.memory-panel{max-width:980px;width:100%;height:100%;max-height:100%;display:flex;flex-direction:column;overflow:hidden;padding-top:12px;padding-bottom:12px}
+.memory-panel .mw{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
+.memory-panel>.scene-actions{flex:none;margin-top:8px}
+.memory-panel .mw-head{flex:none;display:block;text-align:center}
+.mw-title{font-size:clamp(26px,3.6vw,40px);margin:2px 0 2px;letter-spacing:-.03em}
+.mw-sub{color:#c9bfe6;font-size:13px;margin:0 0 10px}
+.mw-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(220px,30%) 1fr;gap:16px;text-align:left}
+.mw-photos,.mw-notes{min-height:0;overflow-y:auto;padding:8px 8px 14px;scrollbar-width:thin;scrollbar-color:#5b4a8a transparent}
+.mw-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px 10px;align-content:start;background:#a0703f22;border:1px solid #c79a6a33;border-radius:16px;background-image:radial-gradient(#ffffff0a 1px,transparent 1px);background-size:12px 12px}
+.mw-polaroid{all:unset;box-sizing:border-box;cursor:pointer;background:#fbf7ef;padding:6px 6px 8px;border-radius:3px;box-shadow:0 8px 18px #0008;transform:rotate(var(--r));transition:transform .2s;animation:module-in .5s var(--d) both;display:flex;flex-direction:column;gap:5px}
+.mw-polaroid:hover,.mw-polaroid:focus-visible{transform:rotate(0) scale(1.05);outline:2px solid #ffda65;outline-offset:2px;z-index:1}
+.mw-polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:1px}
+.mw-polaroid span{font:600 11px/1.25 'Comic Sans MS','Marker Felt',system-ui;color:#3a2f22;text-align:center}
+.mw-notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px 14px;align-content:start;align-items:start}
+.mw-note{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;margin:6px 0 0;padding:14px 14px 12px;background:var(--c);color:#2a2140;border-radius:4px 4px 14px 4px;box-shadow:0 10px 18px #0007;transform:rotate(var(--r));transition:transform .18s,box-shadow .18s;position:relative;animation:module-in .45s var(--d) both}
+.mw-note:hover,.mw-note:focus-visible{transform:rotate(0) translateY(-3px);box-shadow:0 14px 26px #000a;outline:2px solid #ffffffaa;outline-offset:2px}
+.mw-pin{position:absolute;top:-6px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9fb4,#c2185b);box-shadow:0 2px 3px #0006}
+.mw-note-head{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.mw-note-head b{display:block;font-size:14px;color:#1d1530}
+.mw-note-head small{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5d4f80;font-weight:800}
+.mw-note q{display:block;font-size:13.5px;line-height:1.4;color:#2a2140;font-weight:600}
+.mw-read{display:block;margin-top:8px;font-size:11px;font-weight:900;letter-spacing:.06em;color:#7a3fb5}
+.mw-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 2px 6px #0004}
+.mw-avatar.big{width:64px;height:64px}
+.mw-initials{display:inline-flex;align-items:center;justify-content:center;background:hsl(var(--h) 55% 45%);color:#fff;font-weight:900;font-size:14px;letter-spacing:.04em}
+.mw-avatar.big.mw-initials{font-size:22px}
+.mw-farewell{flex:none;font-size:16px;margin:10px 0 0;color:#fff}
+.mw-reader{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:#070414d9;backdrop-filter:blur(4px);border-radius:14px;padding:10px}
+.mw-reader[hidden]{display:none}
+.mw-reader-inner{width:min(720px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;animation:module-in .3s both}
+.mw-sheet{background:var(--c);color:#241b38;border-radius:6px 6px 18px 6px;box-shadow:0 18px 40px #000a;padding:18px 22px;text-align:left;min-height:0;display:flex;flex-direction:column}
+.mw-sheet header{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex:none}
+.mw-sheet header b{display:block;font-size:20px;color:#1a1230}
+.mw-sheet header small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5d4f80;font-weight:800}
+.mw-text{overflow-y:auto;min-height:0;max-height:min(52vh,420px);padding-right:6px;font-size:15px;line-height:1.55;scrollbar-width:thin}
+.mw-text p{margin:0 0 10px}
+.mw-text h4{margin:12px 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7a3fb5}
+.mw-text h4:first-child{margin-top:0}
+.mw-text ul{margin:0 0 10px;padding-left:20px}
+.mw-text li{margin:0 0 5px}
+.mw-photo-view{margin:0;background:#fbf7ef;padding:10px 10px 12px;border-radius:4px;box-shadow:0 18px 40px #000a;min-height:0;display:flex;flex-direction:column;align-items:center}
+.mw-photo-view img{max-width:100%;max-height:min(56vh,460px);object-fit:contain;display:block}
+.mw-photo-view figcaption{font:600 14px/1.3 'Comic Sans MS','Marker Felt',system-ui;color:#3a2f22;margin-top:8px}
+.mw-nav{display:flex;align-items:center;justify-content:center;gap:12px;flex:none}
+.mw-nav span{color:#d9cdf5;font-weight:800;font-size:13px;min-width:56px}
+.mw-nav button{all:unset;cursor:pointer;color:#fff;background:#2a1d4a;border:1px solid #6b55a8;border-radius:999px;padding:6px 14px;font-weight:800;font-size:14px}
+.mw-nav .mw-prev,.mw-nav .mw-next{font-size:20px;line-height:1;padding:4px 14px}
+.mw-nav button:hover,.mw-nav button:focus-visible{background:#4a3480}
+@media(max-width:760px){.mw-body{grid-template-columns:1fr;overflow-y:auto}.mw-photos{grid-template-columns:repeat(4,minmax(0,1fr))}.mw-notes{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.mw-polaroid,.mw-note,.mw-reader-inner{animation:none}}
+/* Memory Wall reader: beat the generic panel text and header styles. */
+.memory-panel .mw-sheet header{justify-content:flex-start;text-align:left;padding:0;background:none;border:0}
+.memory-panel .mw-text,.memory-panel .mw-text p,.memory-panel .mw-text li{color:#241b38;opacity:1;text-align:left;font-size:15px;line-height:1.55}
+.memory-panel .mw-text h4{color:#7a3fb5;opacity:1}
+.memory-panel .mw-note q,.memory-panel .mw-note b{opacity:1}
