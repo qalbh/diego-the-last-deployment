@@ -11,6 +11,9 @@ const MEMORIES={
   {src:'assets/memories/web/dubai-yacht.jpg',caption:'Dubai Marina: yacht day ⛵'},
   {src:'assets/memories/web/zack-diego.jpg',caption:'Zack & Diego (and one very fluffy colleague) 🐕'},
   {src:'assets/memories/web/dubai-desert.jpg',caption:'The desert crew 🏜️'},
+  {src:'assets/memories/web/helmet-squad.jpg',caption:'The helmet squad 👉'},
+  {src:'assets/memories/web/desert-falcon.jpg',caption:'Falcon in the desert 🦅'},
+  {src:'assets/memories/web/marina-night.jpg',caption:'Dubai Marina by night 🌙'},
   {src:'assets/memories/web/dubai-yacht-2.jpg',caption:'Dubai Marina, take two 🛥️'}
  ],
  messages:[
@@ -77,6 +80,20 @@ I also used to see you traveling all over, and it inspired me so much that I lit
 You’ll truly be missed. I learned a lot from you, not just professionally, but as a person too.
 
 Wishing you the best of luck and lots of success, now and in the foreseeable future.`},
+  {name:'Sush',role:'Engineering Lead',photo:'sush',
+   highlight:'Diego probably holds the Brij world record for fixing issues from most places around the world.',
+   text:`Diego’s foot prints can be found in almost all the repos across Brij. There is not one or two, but in almost all of it. Not to mention the tens of repos he has created on his own for his “side projects”! Whether it is initial contributions to CA microservice or client or custom domains or fully architecting the rebate service on his own or contributing to event hub or mono repo or BD App or V3 app, his contributions are there in almost everything (including future bugs that will be taken by us). Without Diego’s balancing act sometimes or being a stickler for details or being persuasive to find his own way of doing things, Brij App would have been completely different and a lot less exciting without his contributions.
+
+Memorable fix: There are many of them. I cannot think of one emergency fire we had without Diego’s participation and contribution. Wheter it is fixing a bug in midair or fixing an issue while driving, he has been there everywhere. I think Diego probably holds the Brij world record for fixing issues from most places around the world. Especially during his 2023, 2024 Digital nomad phase, he has fixed bugs from London, Lisbon, Delhi, Bangkok, Peru, Dubai, New York and everywhere in between! I think the most memorable one is in eventhub handler that used to work sometimes and other times it would not work and was one of the most difficult bugs to fix because the issue was in a shared key that was cached and depending on whether the last lambda ran from prod or rc, it would use that thereby making it almost impossible to catch that in code. It took many hours of us debugging before Diego found the issue. It is probably the hardest to find bug we have fixed and couldn’t have done with Diego finding the issue and fixing it
+
+His funniest moment I think is the time when we played april fool prank on Zack and started accusing each other and threatening to leave. It is probably the funniest thing we have played as a group. Apart from that, the time he fooled everyone by running a video of himself in a loop and waiting for people to notice! Another one is the time when I met Diego in New York and I showed him around by making him walk everywhere and we probably walked for 8-10 miles that day! I didn’t know that I was making him walk so much until Eilen told me the joke about him and his walking in Dubai!
+
+Personal message: I am blessed to have a colleague and also a dear personal friend like Diego. I also have the honor of meeting Diego for the first time by any Brij colleague when I met him in New York. And since then we met another two times in Dubai and New York again. From doing PoCs together to discussing about latest video in fireship to discussing potential next big ideas in tech to teaming up with Zack to work on Brij Robotics to meeting him and his wife in Dubai and making them taste Pani Puri and Cardamom Chai to walking in Manhattan showing him the city  to taking the boat in Hoboken to discussing geopolitics in our group chat to almost going to San Francisco to meet him to making plans for travels to Peru, SF and China, Diego is not just a colleague but a very good personal friend and I hope we continue the friendship and keep meeting a few times a year and knowing Diego’s passion for entrepeneuship, coding, creating good software, I am sure Diego will be very successful in whatever he does next. I wish him the best of luck and I owe him a trip to Peru next year!`},
+  {name:'Ali',role:'Engineering Manager',photo:'ali',
+   highlight:'From meeting in Dubai to winning the AWS award together 🏆, it’s been a great ride.',
+   text:`From meeting in Dubai to winning the AWS award together 🏆, it’s been a great ride. Thanks for all the help, the laughs, and for always having my back.
+Best of luck with your new startup.
+Gonna miss you, man. Stay in touch! 🙌`},
   {name:'Alina',role:'',photo:null,
    highlight:'Thank you for always answering “hey Diego, quick question 👀” with patience and a fix.',
    text:`Diego, working with you has been a real pleasure. Thank you for your support, your humor, and for making QA and dev feel like one team.
